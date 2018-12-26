@@ -1,6 +1,8 @@
 package cn.neusoft.loveread.pojo;
 
-public class TbItemParamAndName extends TbItemParam {
+import java.io.Serializable;
+
+public class TbItemParamAndName extends TbItemParam implements Serializable {
     private String itemCatName;
 
     public String getItemCatName() {

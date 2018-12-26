@@ -1,6 +1,8 @@
 package cn.neusoft.loveread.pojo;
 
-public class TbOrderItem {
+import java.io.Serializable;
+
+public class TbOrderItem implements Serializable {
     private String id;
     private String itemId;
     private String orderId;

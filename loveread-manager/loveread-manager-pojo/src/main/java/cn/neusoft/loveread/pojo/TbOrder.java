@@ -1,8 +1,9 @@
 package cn.neusoft.loveread.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TbOrder {
+public class TbOrder implements Serializable {
     private String orderId;
     private String payment;
     private Integer paymentType;
