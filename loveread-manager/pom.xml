@@ -17,6 +17,7 @@
         <module>loveread-manager-interface</module>
         <module>loveread-manager-pojo</module>
         <module>loveread-manager-service</module>
+        <module>loverad-dubbo-admin</module>
     </modules>
     <!--依赖loveread-utils-->
     <dependencies>
