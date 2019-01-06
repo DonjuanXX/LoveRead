@@ -16,7 +16,7 @@ spring:
 
 dubbo:
   application:
-    name: LoveRead
+    name: loveread-manager
   registry:
     address: zookeeper://192.168.25.129:2181
   scan:
