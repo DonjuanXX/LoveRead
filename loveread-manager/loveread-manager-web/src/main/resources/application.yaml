@@ -2,4 +2,4 @@ dubbo:
   application:
     name: loveread-manager-web
   registry:
-    address: zookeeper://192.168.25.129:2181
+    address: zookeeper://192.168.25.130:2181
