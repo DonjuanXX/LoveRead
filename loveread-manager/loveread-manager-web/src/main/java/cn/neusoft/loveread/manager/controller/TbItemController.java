@@ -1,6 +1,7 @@
 package cn.neusoft.loveread.manager.controller;
 
 import cn.neusoft.loveread.common.pojo.EasyUIDataGridResult;
+import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.manager.service.TbItemService;
 import cn.neusoft.loveread.pojo.TbItem;
 
@@ -20,14 +21,21 @@ public class TbItemController {
 
     @GetMapping("/{itemId}")
     @ResponseBody
-    public TbItem getItemById(@PathVariable Long itemId){
+    public TbItem getItemById(@PathVariable Long itemId) {
         return tbItemService.getItemById(itemId);
     }
 
     @GetMapping("/list")
     @ResponseBody
-    public EasyUIDataGridResult getItemList(Integer page,Integer rows){
-        EasyUIDataGridResult result = tbItemService.getItemList(page,rows);
+    public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
+        EasyUIDataGridResult result = tbItemService.getItemList(page, rows);
+        return result;
+    }
+
+    @GetMapping("/save")
+    @ResponseBody
+    public LoveReadResult saveItem(TbItem item, String desc) {
+        LoveReadResult result = tbItemService.addItem(item, desc);
         return result;
     }
 }
