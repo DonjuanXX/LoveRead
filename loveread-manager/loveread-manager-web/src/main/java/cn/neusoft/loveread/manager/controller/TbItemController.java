@@ -32,7 +32,7 @@ public class TbItemController {
         return result;
     }
 
-    @GetMapping("/save")
+    @RequestMapping("/save")
     @ResponseBody
     public LoveReadResult saveItem(TbItem item, String desc) {
         LoveReadResult result = tbItemService.addItem(item, desc);

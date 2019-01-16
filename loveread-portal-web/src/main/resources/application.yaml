@@ -1,0 +1,10 @@
+#tomcat config
+server:
+  port: 8082
+
+#dubbo config
+dubbo:
+  application:
+    name: loveread-manager-web
+  registry:
+      address: zookeeper://192.168.25.130:2181
