@@ -42,6 +42,7 @@
         <quartz.version>2.2.2</quartz.version>
         <springboot.version>2.0.4.RELEASE</springboot.version>
         <fastdfs.version>1.27</fastdfs.version>
+        <mybatis.version>3.4.6</mybatis.version>
     </properties>
 
     <dependencyManagement>
@@ -90,6 +91,12 @@
                 <groupId>com.github.miemiedev</groupId>
                 <artifactId>mybatis-paginator</artifactId>
                 <version>${mybatis.paginator.version}</version>
+            </dependency>
+            <!--web 补丁-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
@@ -173,7 +180,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
 
 </project>
