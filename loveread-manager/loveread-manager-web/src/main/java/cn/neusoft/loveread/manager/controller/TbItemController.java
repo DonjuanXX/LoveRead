@@ -28,8 +28,9 @@ public class TbItemController {
     @GetMapping("/list")
     @ResponseBody
     public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
-        EasyUIDataGridResult result = tbItemService.getItemList(page, rows);
-        return result;
+//        EasyUIDataGridResult result = tbItemService.getItemList(page, rows);
+//        return result;
+        return tbItemService.getItemList(page, rows);
     }
 
     @RequestMapping("/save")

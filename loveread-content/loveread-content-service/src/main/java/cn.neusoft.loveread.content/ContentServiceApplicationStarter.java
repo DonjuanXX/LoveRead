@@ -1,4 +1,5 @@
-package cn.neusoft.loveread.manager;
+package cn.neusoft.loveread.content;
+
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
@@ -9,14 +10,15 @@ import java.util.concurrent.CountDownLatch;
 
 @MapperScan(value = "cn.neusoft.loveread.manager.mapper")
 @SpringBootApplication
-public class ManagerServiceApplicationStarter {
+public class ContentServiceApplicationStarter {
+
     public static void main(String[] args) throws InterruptedException {
-//        SpringApplication.run(ManagerServiceApplicationStarter.class, args);
         new SpringApplicationBuilder()
-                .sources(ManagerServiceApplicationStarter.class)
+                .sources(ContentServiceApplicationStarter.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
         CountDownLatch countDownLatch = new CountDownLatch(1);
         countDownLatch.await();
     }
+
 }
