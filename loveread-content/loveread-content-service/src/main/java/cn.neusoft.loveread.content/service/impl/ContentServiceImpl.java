@@ -9,6 +9,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +21,12 @@ public class ContentServiceImpl implements ContentService {
 
     @Autowired
     private TbContentMapper contentMapper;
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+
+    @Value("${CONTENT_KEY}")
+    private String CONTENT_KEY;
 
     @Override
     public EasyUIDataGridResult getContentListByCategoryId(Long categoryId, int page, int rows) {
@@ -35,6 +43,30 @@ public class ContentServiceImpl implements ContentService {
         easyUIDataGridResult.setRows(tbContents);
         easyUIDataGridResult.setTotal(pageInfo.getTotal());
         return easyUIDataGridResult;
+    }
+
+    @Override
+    public List<TbContent> getContentList(Long cid) {
+        //查询缓存
+        try{
+            List<TbContent> contents = (List<TbContent>) redisTemplate.opsForHash().get(CONTENT_KEY,cid+"");
+            System.out.println("read redis catch data...");
+            if(!contents.isEmpty()&&contents!=null){
+                return contents;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //根据cid查询内容列表
+        List<TbContent> list= contentMapper.getContentListByCategoryId(cid);
+        //向缓存中添加数据
+        try{
+            redisTemplate.opsForHash().put(CONTENT_KEY,cid+"",list);
+            System.out.println("write redis catch data...");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override

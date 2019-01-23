@@ -10,6 +10,10 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
+redis:
+  cluster:
+    nodes: 192.168.25.130:6380,192.168.25.130:6381,192.168.25.130:6382
+
 dubbo:
   application:
     name: loveread-manager
