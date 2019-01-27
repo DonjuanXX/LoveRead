@@ -9,10 +9,26 @@ spring:
     url: jdbc:mysql://192.168.25.130:3307/aiyue
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+#    timeout: 5000
+#  redis-single
+    host: 192.168.25.130
+    port: 6380
+#  redis-cluster
+#    cluster:
+#      nodes: 192.168.25.130:6380,192.168.25.130:6381,192.168.25.130:6382
+#    max-redirects: 3
 
-redis:
-  cluster:
-    nodes: 192.168.25.130:6380,192.168.25.130:6381,192.168.25.130:6382
+#    nodes:
+#        - 192.168.25.130:6380
+#        - 192.168.25.130:6381
+#        - 192.168.25.130:6382
+#    lettuce:
+#      pool:
+#        max-active: 100
+#        max-idle: 100
+#        min-idle: 50
+#        max-wait: 6000
 
 dubbo:
   application:

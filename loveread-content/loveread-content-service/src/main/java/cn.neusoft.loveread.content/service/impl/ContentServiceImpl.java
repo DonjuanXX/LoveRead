@@ -23,7 +23,7 @@ public class ContentServiceImpl implements ContentService {
     private TbContentMapper contentMapper;
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Value("${CONTENT_KEY}")
     private String CONTENT_KEY;
@@ -48,22 +48,24 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<TbContent> getContentList(Long cid) {
         //查询缓存
-        try{
-            List<TbContent> contents = (List<TbContent>) redisTemplate.opsForHash().get(CONTENT_KEY,cid+"");
+        try {
+            List<TbContent> contents = (List<TbContent>) redisTemplate.opsForHash().get(CONTENT_KEY, cid.toString());
             System.out.println("read redis catch data...");
-            if(!contents.isEmpty()&&contents!=null){
+            if (contents != null && !contents.isEmpty()) {
+//            if (!contents.isEmpty() && contents != null) {
+                System.out.println("get it");
                 return contents;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //根据cid查询内容列表
-        List<TbContent> list= contentMapper.getContentListByCategoryId(cid);
+        List<TbContent> list = contentMapper.getContentListByCategoryId(cid);
         //向缓存中添加数据
-        try{
-            redisTemplate.opsForHash().put(CONTENT_KEY,cid+"",list);
+        try {
+            redisTemplate.opsForHash().put(CONTENT_KEY, cid.toString(), list);
             System.out.println("write redis catch data...");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
@@ -76,6 +78,8 @@ public class ContentServiceImpl implements ContentService {
         content.setUpdated(new Date());
         //插入数据
         contentMapper.insertContent(content);
+        //缓存同步
+        redisTemplate.opsForHash().delete(CONTENT_KEY, content.getCategoryId().toString());
         return LoveReadResult.ok();
     }
 }
