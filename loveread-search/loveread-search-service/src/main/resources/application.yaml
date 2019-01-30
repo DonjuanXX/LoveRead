@@ -1,0 +1,25 @@
+mybatis:
+  config-location: classpath:mybatis/SqlMapConfig.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+spring:
+  datasource:
+    username: root
+    password: 666999
+    url: jdbc:mysql://192.168.25.130:3307/aiyue
+    #    url: jdbc:mysql://localhost:3306/aitao
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    solr:
+      host: http://192.168.25.130:8983/solr/collection1
+
+dubbo:
+  application:
+    name: loveread-search
+  registry:
+    address: zookeeper://192.168.25.130:2181
+  scan:
+    basePackages: cn.neusoft.loveread.search.service
+  protocol:
+    port: 20882
