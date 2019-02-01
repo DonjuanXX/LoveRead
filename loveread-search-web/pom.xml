@@ -10,13 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>loveread-portal-web</artifactId>
-    <packaging>pom</packaging>
-
-    <name>loveread-portal-web</name>
-    <modules>
-        <module>../loveread-search-web</module>
-    </modules>
+    <artifactId>loveread-search-web</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,21 +27,18 @@
         </dependency>
         <dependency>
             <groupId>cn.neusoft.loveread</groupId>
-            <artifactId>loveread-content-interface</artifactId>
+            <artifactId>loveread-search-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--spring-boot的web组件-->
+        <!--springboot的web组件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--test組件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
-        <!--thymeleaf組件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -70,7 +62,7 @@
     </dependencies>
 
     <build>
-        <finalName>loveread-portal-web</finalName>
+        <finalName>loveread-search-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

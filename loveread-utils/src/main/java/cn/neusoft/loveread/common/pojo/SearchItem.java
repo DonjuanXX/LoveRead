@@ -10,7 +10,15 @@ public class SearchItem implements Serializable {
     private String image;
     private String category_name;
 
-    public String getId(){
+    public String[] getImages() {
+        if (image != null && !"".equals(image)) {
+            String[] images = image.split(",");
+            return images;
+        }
+        return null;
+    }
+
+    public String getId() {
         return id;
     }
 

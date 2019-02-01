@@ -11,6 +11,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>loveread-search</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>loveread-search-service</module>
+        <module>loveread-search-interface</module>
+    </modules>
 
     <dependencies>
         <dependency>
