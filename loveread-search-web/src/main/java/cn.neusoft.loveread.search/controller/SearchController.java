@@ -1,7 +1,6 @@
 package cn.neusoft.loveread.search.controller;
 
 import cn.neusoft.loveread.common.pojo.SearchResult;
-import cn.neusoft.loveread.search.service.SearchItemService;
 import cn.neusoft.loveread.search.service.SearchService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SearchController {
+
     @Reference
     private SearchService searchService;
     @Value("${PAGE_ROWS}")

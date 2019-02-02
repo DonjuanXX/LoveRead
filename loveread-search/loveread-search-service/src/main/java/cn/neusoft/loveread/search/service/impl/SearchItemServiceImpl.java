@@ -1,4 +1,4 @@
-package cn.neusoft.loveread.search.impl;
+package cn.neusoft.loveread.search.service.impl;
 
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.common.pojo.SearchItem;

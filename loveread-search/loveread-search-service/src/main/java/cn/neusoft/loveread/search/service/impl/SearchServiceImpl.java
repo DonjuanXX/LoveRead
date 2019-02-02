@@ -1,4 +1,4 @@
-package cn.neusoft.loveread.search.impl;
+package cn.neusoft.loveread.search.service.impl;
 
 import cn.neusoft.loveread.common.pojo.SearchResult;
 import cn.neusoft.loveread.search.dao.SearchDao;
@@ -28,7 +28,7 @@ public class SearchServiceImpl implements SearchService {
         //设置rows
         query.setRows(rows);
         //设置默认搜索域
-        query.set("df",DEFAULT_FIELD);
+        query.set("df", DEFAULT_FIELD);
         //设置高亮显示
         query.setHighlight(true);
         query.addHighlightField("item_title");
@@ -38,8 +38,8 @@ public class SearchServiceImpl implements SearchService {
         SearchResult searchResult = searchDao.search(query);
         //计算总页数
         int recourdCount = searchResult.getRecourdCount();
-        int pages=recourdCount/rows;
-        if(recourdCount%rows>10){
+        int pages = recourdCount / rows;
+        if (recourdCount % rows > 10) {
             pages++;
         }
         //设置返回结果
