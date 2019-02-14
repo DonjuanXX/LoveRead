@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchController {
 
     @Reference
+
     private SearchService searchService;
     @Value("${PAGE_ROWS}")
     private Integer PAGE_ROWS;
