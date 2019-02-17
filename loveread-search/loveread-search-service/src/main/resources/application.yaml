@@ -13,6 +13,11 @@ spring:
   data:
     solr:
       host: http://192.168.25.130:8983/solr/collection1
+#      host: http://192.168.25.130:8984/solr
+#      repositories:
+#        enabled: true
+#      zk-host: 192.168.25.130:2182,192.168.25.130:2183,192.168.25.130:2184
+
 
 dubbo:
   application:

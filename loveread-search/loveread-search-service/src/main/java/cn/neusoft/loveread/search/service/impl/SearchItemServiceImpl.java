@@ -6,6 +6,7 @@ import cn.neusoft.loveread.search.mapper.SearchItemMapper;
 import cn.neusoft.loveread.search.service.SearchItemService;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 
