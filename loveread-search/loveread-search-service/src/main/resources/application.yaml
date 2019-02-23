@@ -12,12 +12,20 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   data:
     solr:
-      host: http://192.168.25.130:8983/solr/collection1
+      host: http://192.168.25.130:8984/solr/collection2
 #      host: http://192.168.25.130:8984/solr
 #      repositories:
 #        enabled: true
 #      zk-host: 192.168.25.130:2182,192.168.25.130:2183,192.168.25.130:2184
-
+  activemq:
+    user: admin
+    password: admin
+    broker-url: tcp://192.168.25.130:61616
+    pool:
+      enabled: true
+      max-connections: 50
+    packages:
+      trust-all: false
 
 dubbo:
   application:
