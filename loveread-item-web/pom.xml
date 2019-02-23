@@ -65,6 +65,7 @@
         </dependency>
     </dependencies>
 
+
     <build>
         <finalName>loveread-item-web</finalName>
         <plugins>

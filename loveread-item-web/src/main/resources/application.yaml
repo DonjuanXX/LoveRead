@@ -6,3 +6,14 @@ dubbo:
     name: aiyue-item-web
   registry:
     address: zookeeper://192.168.25.130:2181
+
+spring:
+  activemq:
+    packages:
+      trust-all: false
+    user: admin
+    password: admin
+    broker-url: tcp://192.168.25.130:61616
+    pool:
+      enabled: true
+      max-connections: 50

@@ -114,7 +114,9 @@ public class TbItemServiceImpl implements TbItemService {
         result.setRows(list);
         return result;
     }
-
+    /*
+    * 后台管理添加商品至数据库
+    * */
     @Override
     public LoveReadResult addItem(TbItem item, String desc) {
         //生成商品ID
