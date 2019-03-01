@@ -10,13 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>loveread-portal-web</artifactId>
-    <packaging>pom</packaging>
-
-    <name>loveread-portal-web</name>
-    <modules>
-        <module>../loveread-search-web</module>
-    </modules>
+    <artifactId>loveread-sso-web</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,31 +22,26 @@
     <dependencies>
         <dependency>
             <groupId>cn.neusoft.loveread</groupId>
-            <artifactId>loveread-content-interface</artifactId>
+            <artifactId>loveread-sso-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--spring-boot的web组件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--test組件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--thymeleaf組件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-        <!--dubbo-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
         </dependency>
-        <!--zookeeper client-->
         <dependency>
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
@@ -65,7 +55,7 @@
     </dependencies>
 
     <build>
-        <finalName>loveread-portal-web</finalName>
+        <finalName>loveread-sso-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -7,35 +7,20 @@ spring:
     username: root
     password: 666999
     url: jdbc:mysql://192.168.25.130:3307/aiyue
+      #    url: jdbc:mysql://localhost:3306/aitao
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
     timeout: 5000
-#  redis-single
     host: 192.168.25.130
     port: 6380
-#  redis-cluster
-#    cluster:
-#      nodes: 192.168.25.130:6380,192.168.25.130:6381,192.168.25.130:6382
-#    max-redirects: 3
-
-#    nodes:
-#        - 192.168.25.130:6380
-#        - 192.168.25.130:6381
-#        - 192.168.25.130:6382
-#    lettuce:
-#      pool:
-#        max-active: 100
-#        max-idle: 100
-#        min-idle: 50
-#        max-wait: 6000
 
 dubbo:
   application:
-    name: loveread-manager
+    name: loveread-sso
   registry:
     address: zookeeper://192.168.25.130:2181
   scan:
-    basePackages: cn.neusoft.loveread.content.service
+    basePackages: cn.neusoft.loveread.sso.service
   protocol:
-    port: 20881
+    port: 20883

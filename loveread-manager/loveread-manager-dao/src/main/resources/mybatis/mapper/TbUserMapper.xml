@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="selectByKey" resultMap="BaseResultMap" parameterType="java.util.Map">
-        SELECT * FROM tb_user=--
+        SELECT * FROM tb_user
         <choose>
             <!-- test语句必须外面是单引号，里面是双引号，否则失效 -->
             <when test='type=="1"'>
