@@ -15,22 +15,14 @@ spring:
     host: 192.168.25.130
     port: 6380
 
-  activemq:
-    user: admin
-    password: admin
-    broker-url: tcp://192.168.25.130:61616
-    pool:
-      enabled: true
-      max-connections: 50
-    packages:
-      trust-all: false
-
 dubbo:
   application:
-    name: loveread-manager
+    name: loveread-cart
   registry:
     address: zookeeper://192.168.25.130:2181
   scan:
-    basePackages: cn.neusoft.loveread.manager.service
+#    base-packages: cn.neusoft.loveread.cart.service
+    basePackages: cn.neusoft.loveread.cart.service
   protocol:
-    port: 20880
+    port: 20884
+

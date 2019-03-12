@@ -1,27 +1,38 @@
 package cn.neusoft.loveread.common.utils;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+/**
+ *
+ * Cookie 工具类
+ *
+ */
 public final class CookieUtils {
+
     /**
      * 得到Cookie的值, 不编码
      *
-     * @param  request
-     * @param  cookieName
+     * @param request request
+     * @param cookieName cookieName
+     * @return
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName) {
         return getCookieValue(request, cookieName, false);
     }
+
     /**
      * 得到Cookie的值,
      *
-     * @param request
-     * @param cookieName
+     * @param request request
+     * @param cookieName cookie名
+     * @return
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
         Cookie[] cookieList = request.getCookies();
@@ -45,12 +56,13 @@ public final class CookieUtils {
         }
         return retValue;
     }
+
     /**
      * 得到Cookie的值,
      *
-     * @param request
-     * @param cookieName
-     * @return
+     * @param request request
+     * @param cookieName cookie名
+     *
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName, String encodeString) {
         Cookie[] cookieList = request.getCookies();
@@ -212,4 +224,5 @@ public final class CookieUtils {
         }
         return domainName;
     }
+
 }
