@@ -11,4 +11,5 @@ public interface CartService {
     List<TbItem> getCartList(Long userId);
     LoveReadResult updateCartNum(Long userId,Long itemId,int num);
     LoveReadResult deleteCartItem(Long userId,Long itemId);
+    LoveReadResult clearCartList(Long userId);
 }
