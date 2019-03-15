@@ -26,7 +26,7 @@ public class OrderController {
     @RequestMapping("/order-cart.html")
     public String showOrderCart(HttpServletRequest request) {
         TbUser user = (TbUser) request.getAttribute("user");
-        List<TbItem> cartList = cartService.getCartList(5L);
+        List<TbItem> cartList = cartService.getCartList(user.getId());
         request.setAttribute("cartList", cartList);
         return "order-cart";
     }

@@ -26,27 +26,29 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private TbOrderShippingMapper orderShippingMapper;
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Value("${ORDER_GEN_KEY}")
     private String ORDER_GEN_KEY;
     @Value("${ORDER_ID_BEGIN}")
-    private String ORDER_ID_BEGIN;
+    private Integer ORDER_ID_BEGIN;
     @Value("${ORDER_ITEM_ID_GEN_KEY}")
     private String ORDER_ITEM_ID_GEN_KEY;
 
     @Override
     public LoveReadResult createOrder(OrderInfo orderInfo) {
         //接收表单数据并生成订单
-        if(!redisTemplate.hasKey(ORDER_GEN_KEY)){
+        if (!redisTemplate.hasKey(ORDER_GEN_KEY)) {
             redisTemplate.opsForValue().set(ORDER_GEN_KEY, ORDER_ID_BEGIN);
         }
+
         String orderId = redisTemplate.opsForValue().increment(ORDER_GEN_KEY, 1L).toString();
+        Date date = new Date();
+//        String orderId = ORDER_ID_BEGIN+date.toString();
         orderInfo.setOrderId(orderId);
         orderInfo.setPostFee("0");
         //1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
         orderInfo.setStatus(1);
-        Date date = new Date();
         orderInfo.setCreateTime(date);
         orderInfo.setUpdateTime(date);
         // 3、向订单表插入数据。
@@ -68,6 +70,6 @@ public class OrderServiceImpl implements OrderService {
         orderShipping.setUpdated(date);
         orderShippingMapper.insert(orderShipping);
         // 6、返回e3Result。
-        return LoveReadResult.ok();
+        return LoveReadResult.ok(orderId);
     }
 }
