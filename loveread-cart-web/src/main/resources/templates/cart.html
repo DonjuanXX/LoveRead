@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/js/shadow.js?v=20160416"></script>
     <script type="text/javascript" src="/js/common.js"></script>
 
-    <title>我的购物车 - 宜立方商城</title>
+    <title>我的购物车 - 爱阅商城</title>
 </head>
 <body>
 <div th:replace="./commons/header::header"></div>
@@ -32,9 +32,11 @@
     </div>
     <div class="cartMain">
         <div class="cartThead">
-            <div class="tCol tCheckbox"><input name="acart_list_check" id="Zall" type="checkbox" onclick="Zall(this)">
-                全选
-            </div>
+            <!--<div class="tCol tCheckbox"><input name="acart_list_check" id="Zall" type="checkbox"-->
+                                               <!--onclick="javascript:Zall(this)">-->
+                <!--全选-->
+            <!--</div>-->
+            <div class="tCol tCheckbox">&nbsp&nbsp</div>
             <div class="tCol tGoods">商品</div>
             <div class="tCol tPrice">单价</div>
             <div class="tCol tPromotion">优惠</div>
@@ -48,8 +50,7 @@
 
             <div class="cartColumnhd">
                 <div class="cartCheckbox">
-                    <input name="cart_list_yx" id="Zpu" type="checkbox"
-                           onclick="PutongAll(this)">优选商品
+                    优选商品
                 </div>
             </div>
             <div class="cartList youxuan" id="all_putong">
@@ -59,8 +60,8 @@
                         <div class="cartPInfo" id="danjian-0-229363" th:each="cart:${cartList}">
                             <div class="clearit">
                                 <div class="pItem pCheckbox">
-                                    <input name="cart_list" class="putong" value="danjian-0-229363"
-                                           type="checkbox"/>
+                                    <!--<input name="cart_list" class="putong" value="danjian-0-229363"-->
+                                           <!--type="checkbox"/>-->
                                 </div>
                                 <div class="pItem pGoods">
                                     <div class="cart_pimg">
@@ -73,7 +74,7 @@
                                         <div>
                                             <a target="_blank" th:href="|http://localhost:8084/item/${cart.id}.html|">[[${cart.title}]]</a>
                                         </div>
-                                        <div class="cdzg">产地直供</div>
+                                        <div class="cdzg">厂家直销</div>
                                     </div>
                                 </div>
                                 <div class="pItem pPrice">
@@ -107,19 +108,43 @@
         </div>
         <div class="cartOrderCount" id="orderCount">
             <div class="cartButtons">
-                <input type="button" value="删除选中的商品" onclick="javascript:cartDelMore();" class="cartclear">
-                <input type="button" value="清空购物车" onclick="javascript:delAll('273fe391cb449af4');" class="cartclear">
+                <!--<input type="button" value="删除选中的商品" class="cartclear" onclick="javascript:cartDelMore();">-->
+                <!--<input type="button" value="删除所有的商品"  class="cartclear" th:href="|/cart/delete/all.html|">-->
+                <a class="cartclear" th:href="|/cart/delete/all.html|">删除所有的商品</a>
+                <!--<script type="text/JavaScript">function cartDelMore(cart_list) {-->
+                    <!--var items = document.getElementsByName("cart_list");-->
+                    <!--var deletelist;-->
+                    <!--for (var i = 0, j = 0; i < items.length; i++) {-->
+                        <!--if (items[i].checked == true) {-->
+                            <!--deletelist[j++] =items[i].value;-->
+                        <!--}-->
+                    <!--}-->
+                    <!--var jsonStr = JSON.stringify(deletelist);-->
+                    <!--window.location.href="cart/delete/"+jsonStr;-->
+                <!--}-->
+
+                <!--function Zall(e) {-->
+                    <!--var items = document.getElementsByName("cart_list");-->
+                    <!--for (var i = 0; i < items.length; i++) {-->
+                        <!--items[i].checked = document.getElementById("Zall").checked;-->
+                    <!--}-->
+                <!--}-->
+                <!--</script>-->
             </div>
             <div class="cartTotalItem">
                 <span id="all_shopePrice">（不含运费）</span>&nbsp;&nbsp;&nbsp;&nbsp;商品总计：
-                <span class="cartPrice" id="allMoney2">¥ [[${#aggregates.sum(cartList.![price * num]) / 100}]]</span>
+                <!--<span class="cartPrice" id="allMoney2" th:if="${cartList.size()}==0">¥ 0</span>-->
+                <span class="cartPrice" id="allMoney3" th:if="${cartList.size()} &gt; 0">¥  [[${#aggregates.sum(cartList.![price * num]) / 100}]]</span>
+                <span class="cartPrice" id="allMoney2" th:if="${cartList.size()} &lt; 1">¥  0</span>
             </div>
         </div>
         <div class="cartJsuan">
-            <input onclick="javascript:document.location.href='http://localhost:8082'" class="goshop" value="继续购物"
-                   type="button">
+            <input onclick="javascript:document.location.href='http://localhost:8082/index'" class="goshop" value="继续购物"
+                   type="button" th:if="${cartList.size()} &gt; 0">
             <input onclick="javascript:document.location.href='http://localhost:8087/order/order-cart.html'"
-                   class="jiesuan youxuan" value="去结算" type="button">
+                   class="jiesuan youxuan" value="去结算" type="button" th:if="${cartList.size()} &gt; 0">
+            <input onclick="javascript:document.location.href='http://localhost:8082/index'"
+                   class="jiesuan youxuan" value="快去选购书籍吧" type="button" th:if="${cartList.size()} &lt; 1">
         </div>
     </div>
 </div>

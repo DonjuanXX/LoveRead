@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-    <title>登录淘淘</title>
+    <title>登录爱阅书城</title>
     <link rel="stylesheet" type="text/css" href="/css/jquery.alerts.css"/>
     <link rel="stylesheet" type="text/css" href="/css/headerfooterindex.css"/>
     <link rel="stylesheet" type="text/css" href="/css/login.css"/>
@@ -16,7 +16,7 @@
 <body>
 <!-- header -->
 <div class="header">
-    <a href="http://www.e3mall.cn"><img src="/images/logo.png" border="0"><span>欢迎登录</span></a>
+    <a href="http://localhost:8082/index"><img src="/images/logo.png" border="0"><span>欢迎登录</span></a>
 </div>
 <!-- login_main -->
 <div class="login_main clear">
@@ -122,18 +122,17 @@
 </div>
 <!-- /login_main -->
 <div class="footer">
-		<span> <a href="http://www.e3mall.cn/www/379/5109.html" rel="nofollow" class="footerlink1">关于我们</a> | <a
-                href="http://www.e3mall.cn/www/380/5116.html" rel="nofollow" class="footerlink1">联系我们</a> | <a
-                href="http://www.e3mall.cn/www/381/5117.html" rel="nofollow" class="footerlink1">招聘人才</a> | <a
-                href="http://www.e3mall.cn/www/330/2705.html" rel="nofollow" class="footerlink1">友情链接</a> | <a
-                href="http://supplier.e3mall.cn/supplierApply" rel="nofollow" class="footerlink1">供应商申请</a>
+		<span> <a href="https://www.baidu.com" rel="nofollow" class="footerlink1">关于我们</a> | <a
+                href="https://www.baidu.com" rel="nofollow" class="footerlink1">联系我们</a> | <a
+                href="https://www.baidu.com" rel="nofollow" class="footerlink1">招聘人才</a> | <a
+                href="https://www.baidu.com" rel="nofollow" class="footerlink1">友情链接</a> | <a
+                href="https://www.baidu.com" rel="nofollow" class="footerlink1">供应商申请</a>
 		</span>
     <p>
-        北京宜立方电子商务有限公司<br> 北京市公安局顺义分局备案11011302000890号|<a href="http://www.miibeian.gov.cn" target="_blank"
-                                                         rel="nofollow" class="footerlink1">京ICP备12011349号</a>|<a
-            href="http://www.e3mall.cn/www/174/461.html" target="_blank" rel="nofollow"
-            class="footerlink1">企业营业执照</a><br> Copyright© 宜立方商城
-        e3mall.cn 版权所有<br>
+        爱阅书城---读书爱好者的小天地<br> 京公网安备xxxxxxxx号|<a href="https://www.baidu.com" target="_blank"
+                                                         rel="nofollow" class="footerlink1">京ICP证xxxx号</a>|<a
+            href="https://www.baidu.com" target="_blank" rel="nofollow"
+            class="footerlink1">企业营业执照</a><br> Copyright© 爱阅书城 版权所有<br>
     </p>
 </div>
 <!-- /footer -->
@@ -161,7 +160,7 @@
                     console.log(redirectUrl);
                     jAlert('登录成功！', "提示", function () {
                         if (redirectUrl == "" || redirectUrl == null) {
-                            location.href = "http://localhost:8082";
+                            location.href = "http://localhost:8082/index";
                         } else {
                             location.href = redirectUrl;
                         }

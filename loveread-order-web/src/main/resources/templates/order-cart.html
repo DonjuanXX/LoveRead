@@ -95,7 +95,7 @@
         </div>
     </div>
     <div class="orderTbody" style="width:958px;border-bottom:0 none;">
-        <div class="backToCart"><a style=" text-decoration:underline;" target="" href="/cart/index/">返回修改购物车</a></div>
+        <div class="backToCart"><a style=" text-decoration:underline;" target="" th:href="|http://localhost:8086/cart/cart.html|">返回修改购物车</a></div>
         <h3 class="orderTitle">商品信息：</h3>
         <span class="clear"></span>
         <div class="orderPItem">
@@ -119,12 +119,12 @@
                             </div>
                             <div class="orderPInfo" th:each="cart,cartStat : ${cartList}">
                                 <div class="pItem">
-                                    <a th:href="|http://localhost:8086/item/${cart.id}.html|" target="_blank">
+                                    <a th:href="|http://localhost:8084/item/${cart.id}.html|" target="_blank">
                                         <img th:src="${cart.image}" style="width: 60px;height: 60px;"/>
                                     </a>
                                 </div>
                                 <div class="pItem pGoods">
-                                    <a th:href="|http://localhost:8086/item/${cart.id}.html|" target="_blank">[[${cart.title}]]</a>
+                                    <a th:href="|http://localhost:8084/item/${cart.id}.html|" target="_blank">[[${cart.title}]]</a>
                                 </div>
                                 <div class="pItem pPrice" style="position: relative; z-index: 99">¥[[${cart.price / 100 }]]</div>
                                 <div class="pItem pPromotion">¥0</div>
@@ -146,7 +146,6 @@
 
             <div id="ordercoupon1" class="ordercoupon"><span id="ordercoupon"></span></div>
             <div class="order-info" style="z-index: -1;">
-                <div class="orderWeight fl">商品总重量：0.72kg（含包装）</div>
                 <div id="priceitems" class="priceitem">
                     <dl class="fl">
                         <dd>

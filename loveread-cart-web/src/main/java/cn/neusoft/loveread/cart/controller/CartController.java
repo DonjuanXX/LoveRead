@@ -103,6 +103,8 @@ public class CartController {
         //传递给页面
         request.setAttribute("cartList", cartList);
 //        System.out.println("来了");
+//        if(cartList.size()==0)
+//            return "cart_null";
         return "cart";
     }
 
@@ -152,4 +154,19 @@ public class CartController {
         CookieUtils.setCookie(request, response, Loveread_CART, JsonUtils.objectToJson(cartList), CART_EXPIRE, true);
         return "redirect:/cart/cart.html";
     }
+
+    @RequestMapping("/delete/all.html")
+    public String deleteCart(HttpServletRequest request, HttpServletResponse response) {
+        TbUser user = (TbUser) request.getAttribute("user");
+        if (user != null) {
+            cartService.clearCartList(user.getId());
+            return "redirect:/cart/cart.html";
+        }
+        //从url取出id，从cookie中去购物车商品列表
+        List<TbItem> cartList = getCartListFromCookie(request);
+        cartList.clear();
+        CookieUtils.setCookie(request, response, Loveread_CART, JsonUtils.objectToJson(cartList), CART_EXPIRE, true);
+        return "redirect:/cart/cart.html";
+    }
+
 }

@@ -51,6 +51,12 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping("/logout")
+    public String logout( HttpServletRequest request, HttpServletResponse response){
+        CookieUtils.deleteCookie( request, response,TOKEN_KEY);
+        return "logoutSuccess";
+    }
+
     @RequestMapping("/token/{token}")
     @ResponseBody
     public Object getUserByToken(@PathVariable String token,String callback){
