@@ -15,6 +15,7 @@ public class TbItem implements Serializable {
     private Byte status;
     private Date created;
     private Date updated;
+    private Long itemId;
 
     public Long getId() {
         return id;
@@ -102,5 +103,13 @@ public class TbItem implements Serializable {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 }

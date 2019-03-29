@@ -25,7 +25,10 @@
     </select>
     <insert id="insert" parameterType="cn.neusoft.loveread.pojo.TbItem">
         INSERT INTO tb_item
-        (id, title, sell_point, price, num, barcode, image, cid, created, updated)
-        VALUES (#{id}, #{title}, #{sellPoint}, #{price}, #{num}, #{barcode}, #{image}, #{cid}, #{created}, #{updated})
+        (id, title, sell_point, price, num, barcode, image, cid, created, updated, itemId)
+        VALUES (#{id}, #{title}, #{sellPoint}, #{price}, #{num}, #{barcode}, #{image}, #{cid}, #{created}, #{updated}, #{itemId})
     </insert>
+    <delete id="delete" parameterType="cn.neusoft.loveread.pojo.TbItem">
+        DELETE FROM tb_item WHERE id = #{id}
+    </delete>
 </mapper>

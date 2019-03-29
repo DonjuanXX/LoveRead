@@ -46,4 +46,24 @@ public class ItemAddMessageReceiver {
             e.printStackTrace();
         }
     }
+
+    @JmsListener(destination = "itemDeleteTopic",containerFactory = "jmsTopicListenerContainerFactory")
+    public void itemDelReceiver(Long msg){
+        try {
+            // 0、等待1s让manager-service提交完事务，商品添加成功
+            Thread.sleep(1000);
+            // 1、根据商品id查询商品信息
+            SearchItem searchItem = searchItemMapper.getItemById(msg);
+            // 2、创建一SolrInputDocument对象。
+            // 3、使用SolrServer对象写入索引库。
+            solrClient.deleteById(searchItem.getId());
+            solrClient.commit();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

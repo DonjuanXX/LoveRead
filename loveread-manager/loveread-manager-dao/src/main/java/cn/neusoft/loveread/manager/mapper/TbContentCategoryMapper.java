@@ -12,4 +12,6 @@ public interface TbContentCategoryMapper {
     TbContentCategory selectTbContentCatById(Long id);
 
     void updateContentCategoryById(TbContentCategory parentContentCategory);
+
+    void deleteContentCategoryById(Long id);
 }

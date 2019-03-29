@@ -10,4 +10,5 @@ public interface TbItemService {
     EasyUIDataGridResult getItemList(int page,int rows);
     LoveReadResult addItem(TbItem item,String desc);
     TbItemDesc getItemDescById(Long itemId);
+    LoveReadResult deleteItem(TbItem item,TbItemDesc desc);
 }

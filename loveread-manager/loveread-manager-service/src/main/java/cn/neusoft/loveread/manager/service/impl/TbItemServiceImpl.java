@@ -91,7 +91,7 @@ public class TbItemServiceImpl implements TbItemService {
                 redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, itemDesc);
                 redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
                 System.out.println("write redis item desc information");
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return itemDesc;
@@ -114,9 +114,10 @@ public class TbItemServiceImpl implements TbItemService {
         result.setRows(list);
         return result;
     }
+
     /*
-    * 后台管理添加商品至数据库
-    * */
+     * 后台管理添加商品至数据库
+     * */
     @Override
     public LoveReadResult addItem(TbItem item, String desc) {
         //生成商品ID
@@ -128,8 +129,8 @@ public class TbItemServiceImpl implements TbItemService {
         Date date = new Date();
         item.setCreated(date);
         item.setUpdated(date);
+        item.setItemId(itemId);
         //表 插数据
-        tbItemMapper.insert(item);
         //创建一个TbItemDesc对象
         TbItemDesc itemDesc = new TbItemDesc();
         itemDesc.setCreated(date);
@@ -138,10 +139,19 @@ public class TbItemServiceImpl implements TbItemService {
         itemDesc.setUpdated(date);
         //向商品描述表插入数据
         tbItemDescMapper.insert(itemDesc);
+        tbItemMapper.insert(item);
         //发送消息队列，通知新增商品
         ActiveMQTopic itemAddTopic = new ActiveMQTopic("itemAddTopic");
         jmsMessagingTemplate.convertAndSend(itemAddTopic, item.getId());
         return LoveReadResult.ok();
     }
 
+    @Override
+    public LoveReadResult deleteItem(TbItem tbItem, TbItemDesc tbItemDesc) {
+        tbItemMapper.delete(tbItem);
+        tbItemDescMapper.delete(tbItemDesc);
+        ActiveMQTopic itemDeleteTopic = new ActiveMQTopic("itemDeleteTopic");
+        jmsMessagingTemplate.convertAndSend(itemDeleteTopic, tbItem.getId());
+        return LoveReadResult.ok();
+    }
 }

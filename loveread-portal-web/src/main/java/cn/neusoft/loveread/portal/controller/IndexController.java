@@ -25,4 +25,10 @@ public class IndexController {
         model.addAttribute("ad1List",contentList);
         return "index";
     }
+    @RequestMapping("/")
+    public String showIndex2(Model model){
+        List<TbContent> contentList =contentService.getContentList(CONTENT_BANNER_ID);
+        model.addAttribute("ad1List",contentList);
+        return "index";
+    }
 }

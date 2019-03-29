@@ -9,4 +9,6 @@ public interface ContentCategoryService {
     List<EasyUITreeNode> getContentCategoryList(Long parentId);
 
     LoveReadResult addContentCategory(long parentId, String name);
+    LoveReadResult deleteContentCategory(long Id);
+    LoveReadResult updateContentCategoryReal(long parentId, String name);
 }

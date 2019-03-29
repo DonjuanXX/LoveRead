@@ -28,5 +28,6 @@ public class ContentController {
     public LoveReadResult addContent(TbContent content){
         return contentService.addContent(content);
     }
+
 }
 

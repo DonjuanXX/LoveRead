@@ -38,4 +38,8 @@
         sort_order = #{sortOrder}, is_parent = #{isParent}, updated = #{updated}
         WHERE id = #{id}
     </update>
+
+    <delete id="deleteContentCategoryById" parameterType="cn.neusoft.loveread.pojo.TbContentCategory">
+        DELETE FROM tb_content_category WHERE id = #{id}
+    </delete>
 </mapper>

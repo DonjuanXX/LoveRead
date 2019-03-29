@@ -25,16 +25,16 @@ public class PictureController {
     public String fileUpload(MultipartFile uploadFile) {
         Map result = new HashMap<>();
         try {
-            //1、取文件的扩展名
+            //取文件的扩展名
             String originalFilename = uploadFile.getOriginalFilename();
             String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-            //2、创建一个FastDFS的客户端
+            //创建一个FastDFS的客户端
             FastDFSClient fastDFSClient = new FastDFSClient("classpath:conf/fastdfs-client.conf");
-            //3、执行上传处理
+            //执行上传处理
             String path = fastDFSClient.uploadFile(uploadFile.getBytes(), extName);
-            //4、拼接返回的url和ip地址，拼装成完整的url
+            //拼接返回的url和ip地址，拼装成完整的url
             String url = IMAGE_SERVER_URL + path;
-            //5、返回map
+            //返回map
             result.put("error", 0);
             result.put("url", url);
             return JsonUtils.objectToJson(result);

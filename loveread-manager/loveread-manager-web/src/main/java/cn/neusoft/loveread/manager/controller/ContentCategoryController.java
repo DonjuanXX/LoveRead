@@ -32,4 +32,15 @@ public class ContentCategoryController {
         return contentCategoryService.addContentCategory(parentId, name);
     }
 
+    @RequestMapping("/delete")
+    @ResponseBody
+    public LoveReadResult deleteCategory(Long id) {
+        return contentCategoryService.deleteContentCategory(id);
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public LoveReadResult updateCategory(Long id, String name) {
+        return contentCategoryService.updateContentCategoryReal(id, name);
+    }
 }

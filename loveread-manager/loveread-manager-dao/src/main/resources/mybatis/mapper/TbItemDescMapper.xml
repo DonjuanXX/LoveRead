@@ -20,4 +20,8 @@
         SELECT * FROM tb_item_desc WHERE item_id = #{itemId}
     </select>
 
+    <delete id="delete" parameterType="cn.neusoft.loveread.pojo.TbItemDesc">
+        DELETE FROM tb_item_desc WHERE item_id = #{itemId}
+    </delete>
+
 </mapper>

@@ -7,6 +7,7 @@ import cn.neusoft.loveread.manager.mapper.TbContentCategoryMapper;
 import cn.neusoft.loveread.pojo.TbContentCategory;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,11 +27,11 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         List<TbContentCategory> list = contentCategoryMapper.selectTbContentCatsByParentId(parentId);
         // 4、把列表转换成List<EasyUITreeNode>ub
         List<EasyUITreeNode> resultList = new ArrayList<>();
-        for (TbContentCategory contentCategory : list){
+        for (TbContentCategory contentCategory : list) {
             EasyUITreeNode node = new EasyUITreeNode();
             node.setId(contentCategory.getId());
             node.setText(contentCategory.getName());
-            node.setState(contentCategory.getParent()?"closed":"open");
+            node.setState(contentCategory.getParent() ? "closed" : "open");
             // 添加到列表
             resultList.add(node);
         }
@@ -38,7 +39,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
     }
 
     @Override
-    public LoveReadResult addContentCategory(long parentId,String name){
+    public LoveReadResult addContentCategory(long parentId, String name) {
         // 1、接收两个参数：parentId、name
         // 2、向tb_content_category表中插入数据。
         // a)创建一个TbContentCategory对象
@@ -67,4 +68,34 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         return LoveReadResult.ok(tbContentCategory);
     }
 
+    @Override
+    public LoveReadResult deleteContentCategory(long Id) {
+        //发送过来的是该类目的id
+        TbContentCategory tbContentCategory = contentCategoryMapper.selectTbContentCatById(Id);
+        TbContentCategory parentNode = contentCategoryMapper.selectTbContentCatById(tbContentCategory.getParentId());
+        if(tbContentCategory.getParent()){
+            List<TbContentCategory> list = contentCategoryMapper.selectTbContentCatsByParentId(Id);
+            for (TbContentCategory contentCategory : list) {
+                contentCategoryMapper.deleteContentCategoryById(contentCategory.getId());
+            }
+        }
+        contentCategoryMapper.deleteContentCategoryById(Id);
+        if (parentNode.getParent()) {
+            if (contentCategoryMapper.selectTbContentCatsByParentId(parentNode.getId()).size() == 0) {
+                parentNode.setParent(false);
+                parentNode.setUpdated(new Date());
+                contentCategoryMapper.updateContentCategoryById(parentNode);
+            }
+        }
+        return LoveReadResult.ok(parentNode);
+    }
+
+    @Override
+    public LoveReadResult updateContentCategoryReal(long id, String name) {
+        TbContentCategory tbContentCategory = contentCategoryMapper.selectTbContentCatById(id);
+        tbContentCategory.setName(name);
+        tbContentCategory.setUpdated(new Date());
+        contentCategoryMapper.updateContentCategoryById(tbContentCategory);
+        return LoveReadResult.ok();
+    }
 }
