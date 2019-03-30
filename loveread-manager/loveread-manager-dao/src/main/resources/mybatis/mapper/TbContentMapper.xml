@@ -16,6 +16,23 @@
     <resultMap id="BaseResultMap" type="cn.neusoft.loveread.pojo.TbContent" extends="MiniResultMap">
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
+    <update id="updateContent" parameterType="cn.neusoft.loveread.pojo.TbContent">
+        UPDATE tb_content
+        SET category_id = #{categoryId},
+        title = #{title},
+        sub_title = #{subTitle},
+        title_desc = #{titleDesc},
+        url = #{url},
+        pic = #{pic},
+        pic2 = #{pic2},
+        content = #{content},
+        created = #{created},
+        updated = #{updated}
+        WHERE id = #{id,jdbcType=BIGINT}
+</update>
+    <delete id="deleteContent" parameterType="cn.neusoft.loveread.pojo.TbContent">
+        DELETE FROM tb_content WHERE id = #{id}
+    </delete>
 
     <select id="getContentListByCategoryId" parameterType="java.lang.Long" resultMap="MiniResultMap">
         SELECT id, title, sub_title, title_desc, url, pic, pic2, created, updated
@@ -26,6 +43,11 @@
     <select id="getAllContentList" resultMap="MiniResultMap">
         SELECT id, title, sub_title, title_desc, url, pic, pic2, created, updated
         FROM tb_content
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_content
+        WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
     <insert id="insertContent" parameterType="cn.neusoft.loveread.pojo.TbContent">

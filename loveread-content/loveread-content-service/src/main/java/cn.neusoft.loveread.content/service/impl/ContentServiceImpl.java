@@ -32,7 +32,7 @@ public class ContentServiceImpl implements ContentService {
     public EasyUIDataGridResult getContentListByCategoryId(Long categoryId, int page, int rows) {
         PageHelper.startPage(page, rows);
 
-        List<TbContent> tbContents = new ArrayList<>();
+        List<TbContent> tbContents ;
         if (categoryId == 0L) {
             tbContents = contentMapper.getAllContentList();
         } else {
@@ -80,6 +80,33 @@ public class ContentServiceImpl implements ContentService {
         contentMapper.insertContent(content);
         //缓存同步
         redisTemplate.opsForHash().delete(CONTENT_KEY, content.getCategoryId().toString());
+        return LoveReadResult.ok();
+    }
+
+    @Override
+    public TbContent getContentById(Long id) {
+        //直接从db查找
+        TbContent tbItem = contentMapper.selectByPrimaryKey(id);
+        if (tbItem != null) {
+            return tbItem;
+        }
+        return null;
+    }
+
+    @Override
+    public LoveReadResult deleteContent(TbContent content) {
+        //缓存同步
+        redisTemplate.opsForHash().delete(CONTENT_KEY, content.getCategoryId().toString());
+        //删除数据
+        contentMapper.deleteContent(content);
+        return LoveReadResult.ok();
+    }
+
+    @Override
+    public LoveReadResult updateContent(TbContent content) {
+        redisTemplate.opsForHash().delete(CONTENT_KEY, content.getCategoryId().toString());
+        content.setUpdated(new Date());
+        contentMapper.updateContent(content);
         return LoveReadResult.ok();
     }
 }

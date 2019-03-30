@@ -12,4 +12,10 @@ public interface ContentService {
     EasyUIDataGridResult getContentListByCategoryId(Long categoryId, int page, int rows);
 
     List<TbContent> getContentList(Long cid);
+
+    TbContent getContentById(Long id);
+
+    LoveReadResult deleteContent(TbContent content);
+
+    LoveReadResult updateContent(TbContent content);
 }

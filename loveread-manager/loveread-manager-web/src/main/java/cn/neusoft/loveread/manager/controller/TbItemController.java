@@ -39,14 +39,30 @@ public class TbItemController {
 
     @RequestMapping("/delete")
     @ResponseBody
-    public LoveReadResult delete(@RequestBody String id){
-//        LoveReadResult result = tbItemService.deleteItem(id);
-//        ids=xxxx
-        String[] ids = id.split("=",2);
-        long Id = Long.parseLong(ids[1]);
-        TbItem tbItem = tbItemService.getItemById(Id);
-        TbItemDesc tbItemDesc = tbItemService.getItemDescById(Id);
-        LoveReadResult result = tbItemService.deleteItem(tbItem,tbItemDesc);
-        return result;
+    public LoveReadResult delete(@RequestBody String id) {
+        String[] ids = id.split("=", 2);
+//        if (ids[1].indexOf("%2C") != 0)  indexof没有返回-1
+        String[] target = ids[1].split("%2C");
+        int frequency = target.length;
+        while (frequency-- != 0) {
+            long Id = Long.parseLong(target[frequency]);
+            TbItem tbItem = tbItemService.getItemById(Id);
+            TbItemDesc tbItemDesc = tbItemService.getItemDescById(Id);
+            tbItemService.deleteItem(tbItem, tbItemDesc);
+        }
+        return LoveReadResult.ok();
+    }
+
+    @GetMapping("/desc/{itemId}")
+    @ResponseBody
+    public TbItemDesc getItemDescById(@PathVariable Long itemId) {
+        return tbItemService.getItemDescById(itemId);
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public LoveReadResult update(TbItem item) {
+        System.out.println(item.toString());
+        return LoveReadResult.ok();
     }
 }
