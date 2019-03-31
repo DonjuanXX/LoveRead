@@ -7,8 +7,10 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.listener.adapter.ListenerExecutionFailedException;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 
 @Component
@@ -19,8 +21,8 @@ public class ItemAddMessageReceiver {
     @Autowired
     private SolrClient solrClient;
 
-    @JmsListener(destination = "itemAddTopic",containerFactory = "jmsTopicListenerContainerFactory")
-    public void itemAddReceiver(Long msg){
+    @JmsListener(destination = "itemAddTopic", containerFactory = "jmsTopicListenerContainerFactory")
+    public void itemAddReceiver(Long msg) {
         try {
             // 0、等待1s让manager-service提交完事务，商品添加成功
             Thread.sleep(1000);
@@ -47,16 +49,13 @@ public class ItemAddMessageReceiver {
         }
     }
 
-    @JmsListener(destination = "itemDeleteTopic",containerFactory = "jmsTopicListenerContainerFactory")
-    public void itemDelReceiver(Long msg){
+    @JmsListener(destination = "itemDeleteTopic", containerFactory = "jmsTopicListenerContainerFactory")
+    public void itemDelReceiver(Long msg) {
         try {
-            // 0、等待1s让manager-service提交完事务，商品添加成功
+            // 0、等待1s让manager-service提交完事务
             Thread.sleep(1000);
             // 1、根据商品id查询商品信息
-            SearchItem searchItem = searchItemMapper.getItemById(msg);
-            // 2、创建一SolrInputDocument对象。
-            // 3、使用SolrServer对象写入索引库。
-            solrClient.deleteById(searchItem.getId());
+            solrClient.deleteById(msg.toString());
             solrClient.commit();
         } catch (SolrServerException e) {
             e.printStackTrace();
@@ -66,4 +65,26 @@ public class ItemAddMessageReceiver {
             e.printStackTrace();
         }
     }
+
+//    @JmsListener(destination = "itemUpdateTopic", containerFactory = "jmsTopicListenerContainerFactory")
+//    public void itemUpdateReceiver(Long msg) {
+//        try {
+//            // 0、等待1s让manager-service提交完事务
+//            Thread.sleep(1000);
+//            // 1、根据商品id查询商品信息
+//            SearchItem searchItem = searchItemMapper.getItemById(msg);
+//            // 2、创建一SolrInputDocument对象。
+//            // 3、使用SolrServer对象写入索引库。
+//            solrClient.u(msg.toString());
+//            solrClient.commit();
+//        } catch (SolrServerException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ListenerExecutionFailedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

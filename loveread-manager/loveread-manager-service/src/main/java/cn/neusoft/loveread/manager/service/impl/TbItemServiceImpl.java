@@ -154,4 +154,17 @@ public class TbItemServiceImpl implements TbItemService {
         jmsMessagingTemplate.convertAndSend(itemDeleteTopic, tbItem.getId());
         return LoveReadResult.ok();
     }
+
+    @Override
+    public LoveReadResult updateItem(TbItem item, TbItemDesc itemDesc) {
+//        tbItemMapper.update(item);
+//        tbItemDescMapper.update(itemDesc);
+        item.setUpdated(new Date());
+        itemDesc.setUpdated(new Date());
+        tbItemDescMapper.update(itemDesc);
+        tbItemMapper.update(item);
+        ActiveMQTopic itemAddTopic = new ActiveMQTopic("itemAddTopic");
+        jmsMessagingTemplate.convertAndSend(itemAddTopic, item.getId());
+        return LoveReadResult.ok();
+    }
 }

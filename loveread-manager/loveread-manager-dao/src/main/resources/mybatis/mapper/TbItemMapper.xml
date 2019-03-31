@@ -14,6 +14,18 @@
         <result column="created" property="created" jdbcType="TIMESTAMP"/>
         <result column="updated" property="updated" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <update id="update">
+        UPDATE tb_item
+        SET title = #{title},
+        sell_point = #{sellPoint},
+        price = #{price},
+        num = #{num},
+        barcode = #{barcode},
+        image = #{image},
+        cid = #{cid},
+        updated = #{updated}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select *
         from tb_item

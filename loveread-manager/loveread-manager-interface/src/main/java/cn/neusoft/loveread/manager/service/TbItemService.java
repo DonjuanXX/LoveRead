@@ -7,8 +7,14 @@ import cn.neusoft.loveread.pojo.TbItemDesc;
 
 public interface TbItemService {
     TbItem getItemById(Long itemId);
-    EasyUIDataGridResult getItemList(int page,int rows);
-    LoveReadResult addItem(TbItem item,String desc);
+
+    EasyUIDataGridResult getItemList(int page, int rows);
+
+    LoveReadResult addItem(TbItem item, String desc);
+
     TbItemDesc getItemDescById(Long itemId);
-    LoveReadResult deleteItem(TbItem item,TbItemDesc desc);
+
+    LoveReadResult deleteItem(TbItem item, TbItemDesc desc);
+
+    LoveReadResult updateItem(TbItem item, TbItemDesc itemDesc);
 }

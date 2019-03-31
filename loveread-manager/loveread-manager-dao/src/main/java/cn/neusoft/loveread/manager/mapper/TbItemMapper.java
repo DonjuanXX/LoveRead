@@ -13,4 +13,6 @@ public interface TbItemMapper {
     void insert(TbItem item);
 
     void delete(TbItem item);
+
+    void update(TbItem item);
 }

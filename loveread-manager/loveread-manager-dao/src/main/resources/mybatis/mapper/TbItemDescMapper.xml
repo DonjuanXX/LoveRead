@@ -15,13 +15,19 @@
         INSERT INTO tb_item_desc
         (item_id, item_desc, created, updated) VALUES (#{itemId}, #{itemDesc}, #{created}, #{updated})
     </insert>
+    <update id="update">
+        UPDATE tb_item_desc
+        SET item_desc = #{itemDesc},
+        updated = #{updated}
+        WHERE item_id = #{itemId,jdbcType=BIGINT}
+    </update>
 
     <select id="selectItemDescByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        SELECT * FROM tb_item_desc WHERE item_id = #{itemId}
+        SELECT * FROM tb_item_desc WHERE item_id = #{itemId,jdbcType=BIGINT}
     </select>
 
     <delete id="delete" parameterType="cn.neusoft.loveread.pojo.TbItemDesc">
-        DELETE FROM tb_item_desc WHERE item_id = #{itemId}
+        DELETE FROM tb_item_desc WHERE item_id = #{itemId,jdbcType=BIGINT}
     </delete>
 
 </mapper>

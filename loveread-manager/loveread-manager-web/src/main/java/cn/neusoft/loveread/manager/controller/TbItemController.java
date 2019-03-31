@@ -10,6 +10,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/item")
 public class TbItemController {
@@ -47,7 +49,7 @@ public class TbItemController {
         while (frequency-- != 0) {
             long Id = Long.parseLong(target[frequency]);
             TbItem tbItem = tbItemService.getItemById(Id);
-            TbItemDesc tbItemDesc = tbItemService.getItemDescById(Id);
+            TbItemDesc tbItemDesc = tbItemService.getItemDescById(tbItem.getId());
             tbItemService.deleteItem(tbItem, tbItemDesc);
         }
         return LoveReadResult.ok();
@@ -61,8 +63,9 @@ public class TbItemController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public LoveReadResult update(TbItem item) {
-        System.out.println(item.toString());
-        return LoveReadResult.ok();
+    public LoveReadResult update(TbItem item,String desc) {
+        TbItemDesc ItemDesc = tbItemService.getItemDescById(item.getId());
+        ItemDesc.setItemDesc(desc);
+        return tbItemService.updateItem(item,ItemDesc);
     }
 }
