@@ -17,4 +17,5 @@ public interface TbItemService {
     LoveReadResult deleteItem(TbItem item, TbItemDesc desc);
 
     LoveReadResult updateItem(TbItem item, TbItemDesc itemDesc);
+
 }

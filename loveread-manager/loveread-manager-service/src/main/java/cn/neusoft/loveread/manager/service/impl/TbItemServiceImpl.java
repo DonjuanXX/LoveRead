@@ -46,7 +46,7 @@ public class TbItemServiceImpl implements TbItemService {
     public TbItem getItemById(Long itemId) {
         //查询缓存
         try {
-            TbItem tbItem = (TbItem) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY);
+            TbItem tbItem = (TbItem) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId.toString() + ":" + ITEM_INFO_BASE_KEY);
             if (tbItem != null) {
                 System.out.println("read redis item base information....");
                 return tbItem;
@@ -59,9 +59,9 @@ public class TbItemServiceImpl implements TbItemService {
         if (tbItem != null) {
             try {
                 // 把数据保存到缓存
-                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY, tbItem);
+                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId.toString() + ":" + ITEM_INFO_BASE_KEY, tbItem);
                 // 设置缓存有效期
-                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_BASE_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
+                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId.toString() + ":" + ITEM_INFO_BASE_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
                 System.out.println("write redis item base information...");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -75,7 +75,7 @@ public class TbItemServiceImpl implements TbItemService {
     public TbItemDesc getItemDescById(Long itemId) {
         //查询缓存
         try {
-            TbItemDesc itemDesc = (TbItemDesc) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY);
+            TbItemDesc itemDesc = (TbItemDesc) redisTemplate.opsForValue().get(ITEM_INFO_KEY + ":" + itemId.toString() + ":" + ITEM_INFO_DESC_KEY);
             if (itemDesc != null) {
                 System.out.println("read redis item desc information...");
                 return itemDesc;
@@ -88,8 +88,8 @@ public class TbItemServiceImpl implements TbItemService {
         if (itemDesc != null) {
             // 把数据保存到缓存
             try {
-                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, itemDesc);
-                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId + ":" + ITEM_INFO_DESC_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
+                redisTemplate.opsForValue().set(ITEM_INFO_KEY + ":" + itemId.toString() + ":" + ITEM_INFO_DESC_KEY, itemDesc);
+                redisTemplate.expire(ITEM_INFO_KEY + ":" + itemId.toString() + ":" + ITEM_INFO_DESC_KEY, ITEM_INFO_EXPIRE, TimeUnit.HOURS);
                 System.out.println("write redis item desc information");
             } catch (Exception e) {
                 e.printStackTrace();

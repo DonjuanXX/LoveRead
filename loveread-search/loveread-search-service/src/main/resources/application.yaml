@@ -26,6 +26,10 @@ spring:
       max-connections: 50
     packages:
       trust-all: false
+  redis:
+    timeout: 5000
+    host: 192.168.25.130
+    port: 6380
 
 dubbo:
   application:

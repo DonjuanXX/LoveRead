@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Cache-Control" content="max-age=300"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>[[${query}]] - 商品搜索 - 爱阅书城</title>
+    <title>[[${query}]] - 分类查询 - 爱阅书城</title>
     <link rel="stylesheet" type="text/css" href="/css/productList.css"/>
     <link rel="stylesheet" type="text/css" href="/css/base_w1200.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
@@ -37,10 +37,10 @@
                     <span class="txt">
                         <span class="n">[[${page}]]/</span ><span th:text="${totalPages >0? totalPages : 1}"></span>
                     </span>
-                    <a class="prev" th:href="'/search.html?keyword='+${query}+'&page='+${page - 1 > 0 ? page - 1:1}"
+                    <a class="prev" th:href="'/list.html?cid='+${query}+'&page='+${page - 1 > 0 ? page - 1:1}"
                        target="_self">上一页</a><a
                         class="next"
-                        th:href="'/search.html?keyword='+${query}+'&page='+${page + 1 > totalPages ? (totalPages > 0 ? totalPages:1 ):page + 1}">下一页</a>
+                        th:href="'/list.html?cid='+${query}+'&page='+${page + 1 > totalPages ? (totalPages > 0 ? totalPages:1 ):page + 1}">下一页</a>
                 </div>
                 <div class="total">共<span th:text="${recourdCount}"></span>个商品</div>
             </div>

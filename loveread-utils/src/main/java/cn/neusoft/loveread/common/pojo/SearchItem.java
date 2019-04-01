@@ -1,7 +1,10 @@
 package cn.neusoft.loveread.common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchItem implements Serializable {
     private String id;
     private String title;

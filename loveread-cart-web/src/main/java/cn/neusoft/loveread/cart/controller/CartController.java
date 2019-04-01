@@ -102,9 +102,6 @@ public class CartController {
         }
         //传递给页面
         request.setAttribute("cartList", cartList);
-//        System.out.println("来了");
-//        if(cartList.size()==0)
-//            return "cart_null";
         return "cart";
     }
 

@@ -28,4 +28,25 @@
         WHERE a.`status`=1
         AND a.id=#{itemId}
     </select>
+    <select id="getItemListByCategory" parameterType="long" resultType="cn.neusoft.loveread.common.pojo.SearchItem">
+        SELECT
+        id,title,sell_point,price,image
+        FROM
+         `tb_item`
+        WHERE cid = #{cid,jdbcType=BIGINT}
+    </select>
+    <select id="getCategoryName" resultType="cn.neusoft.loveread.pojo.TbItemCat">
+        SELECT id,name
+        FROM tb_item_cat
+    </select>
+    <select id="getChildNodeByCid" resultType="java.lang.Long">
+        SELECT id
+        FROM tb_item_cat
+        WHERE parent_id = #{cid}
+    </select>
+    <select id="getUnionNode" resultType="java.lang.Long">
+        SELECT id
+        FROM tb_item_cat
+        WHERE is_parent = 1
+    </select>
 </mapper>

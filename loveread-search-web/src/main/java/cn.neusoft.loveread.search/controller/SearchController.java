@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchController {
 
     @Reference
-
     private SearchService searchService;
     @Value("${PAGE_ROWS}")
     private Integer PAGE_ROWS;
 
     @RequestMapping("/search.html")
-    public String search(String keyword, @RequestParam(defaultValue = "1") Integer page, Model model) throws Exception{
+    public String search(String keyword, @RequestParam(defaultValue = "1") Integer page, Model model) throws Exception {
         //调用Service查询商品信息
         SearchResult result = searchService.search(keyword, page, PAGE_ROWS);
         //把结果传递给jsp页面
@@ -30,5 +29,17 @@ public class SearchController {
         model.addAttribute("itemList", result.getItemList());
         //返回逻辑视图
         return "search";
+    }
+
+    @RequestMapping("/list.html")
+    public String list(Long cid, @RequestParam(defaultValue = "1") Integer page, Model model) throws Exception{
+        SearchResult result = searchService.list(cid, page, PAGE_ROWS);
+        String category = searchService.getNameByCid(cid);
+        model.addAttribute("query", category);
+        model.addAttribute("totalPages", result.getTotalPages());
+        model.addAttribute("recourdCount", result.getRecourdCount());
+        model.addAttribute("page", page);
+        model.addAttribute("itemList", result.getItemList());
+        return "list";
     }
 }
