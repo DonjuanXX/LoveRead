@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Cache-Control" content="max-age=300"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>[[${query}]] - 分类查询 - 爱阅书城</title>
+    <title>[[${name}]] - 分类查询 - 爱阅书城</title>
     <link rel="stylesheet" type="text/css" href="/css/productList.css"/>
     <link rel="stylesheet" type="text/css" href="/css/base_w1200.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
@@ -18,13 +18,13 @@
 <!-------面包线 linknav--------->
 <div class="linknav">
     <div class="schArticle">
-        <a th:href="'/search.html?keyword='+${query}" target="_blank">找到和“<span
-                th:text="${query}"></span>”相关的图书<span
+        <a th:href="'/list.html?cid='+${query}" target="_blank">找到和“<span
+                th:text="${name}"></span>”相关的图书<span
                 id="articlenum" th:text="${recourdCount}"></span>件&gt;&gt;
         </a>
     </div>
     <div class="breadcrumb">
-        <span th:text="'全部结果&nbsp;&gt;&nbsp;'+${query}"></span>
+        <span th:text="'全部结果&nbsp;&gt;&nbsp;'+${name}"></span>
     </div>
 </div>
 <div class="content_list">

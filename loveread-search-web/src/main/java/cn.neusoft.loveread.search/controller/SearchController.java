@@ -35,7 +35,8 @@ public class SearchController {
     public String list(Long cid, @RequestParam(defaultValue = "1") Integer page, Model model) throws Exception{
         SearchResult result = searchService.list(cid, page, PAGE_ROWS);
         String category = searchService.getNameByCid(cid);
-        model.addAttribute("query", category);
+        model.addAttribute("query", cid);
+        model.addAttribute("name", category);
         model.addAttribute("totalPages", result.getTotalPages());
         model.addAttribute("recourdCount", result.getRecourdCount());
         model.addAttribute("page", page);

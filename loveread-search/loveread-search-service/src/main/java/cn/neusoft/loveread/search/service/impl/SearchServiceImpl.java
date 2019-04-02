@@ -75,6 +75,7 @@ public class SearchServiceImpl implements SearchService {
         List<SearchItem> list = new ArrayList<>();
         List<Long> childNode = getRealCategory(cid);
         List<Long> realNode = new ArrayList<>(childNode);
+        realNode.add(cid);
         for (Long node : childNode) {
             realNode.addAll(getRealCategory(node));
         }
