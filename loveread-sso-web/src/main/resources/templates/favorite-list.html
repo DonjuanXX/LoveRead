@@ -75,15 +75,6 @@
             </span>
                 <span class="regInput" id="phoneErr"></span>
             </li>
-            <li class="regMb30">
-                <label><font></font> 兴趣爱好：</label>
-                <span class="regM defaultBorder">
-            	<input id="favorite" name="favorite" autocomplete="off" class="regInput" type="text"
-                       onfocus="showtip('favorite','favoriteErr',1);"/>
-            	<em></em>
-            </span>
-                <span class="regInput" id="favoriteErr"></span>
-            </li>
 
 
             <li class="regPl88">
@@ -141,9 +132,7 @@
             if ($("#phone").val() == "") {
                 showError("phone", "phoneErr", memArr[0]);
                 flag = false;
-            }if ($("#favorite").val() == "") {
-                showError("favorite", "favoriteErr", memArr[3]);
-                flag = false;
+            }
             //密码检查
             if ($("#pwd").val() != $("#pwdRepeat").val()) {
                 showError("pwdRepeat", "password2Err", pwd2Arr[1]);

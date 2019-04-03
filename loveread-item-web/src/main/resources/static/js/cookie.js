@@ -108,9 +108,6 @@ $(function(){
     }), $(".topMenu .tShow").dropdown({
         delay: 50
     });
-	if($(".topMenu .d2 .dd").length){
-		$(".topMenu .d2 .dd").append('<div class="client-promo"><a href="http://app.e3mall.cn#trackref=sfbest_Uhead_Uhead_head_app2" target="_blank" rel="nofollow">先摇券 后买单</a></div>');
-	}
 	if($(".f_ios").length){
 		$(".f_ios").find("li:first").html('<a target="_blank" href="http://app.e3mall.cn">手机客户端</a>');
 	}

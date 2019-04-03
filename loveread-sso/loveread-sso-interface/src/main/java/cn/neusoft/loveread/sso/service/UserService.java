@@ -8,5 +8,6 @@ public interface UserService {
     LoveReadResult register(TbUser tbUser);
     LoveReadResult login(String username, String password);
     LoveReadResult getUserByToken(String token);
+    LoveReadResult setfavorite(String favorite);
 
 }

@@ -13,6 +13,8 @@ var E3MALL = {
 					var username = data.data.username;
 					var html = username + "，欢迎来到爱阅书城！<a href=\"http://localhost:8085/user/logout/\" class=\"link-logout\">[退出]</a>";
 					$("#loginbar").html(html);
+					$("#myOrder").css("display","inline");
+					$("#myMenus").css("display","block");
 				}
 			}
 		});

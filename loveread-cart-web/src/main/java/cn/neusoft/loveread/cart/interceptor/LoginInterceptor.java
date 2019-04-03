@@ -30,6 +30,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         request.setAttribute("user",(TbUser) loveReadResult.getData());
         return true;
-        //上面可不可以删掉？
+
     }
 }

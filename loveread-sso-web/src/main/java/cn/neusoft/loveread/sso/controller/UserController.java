@@ -35,7 +35,9 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseBody
-    public LoveReadResult register(TbUser tbUser) {
+    public LoveReadResult register(TbUser tbUser, String favorite) {
+        if (!favorite.equals(""))
+            userService.setfavorite(favorite);
         return userService.register(tbUser);
     }
 
@@ -52,20 +54,33 @@ public class UserController {
     }
 
     @RequestMapping("/logout")
-    public String logout( HttpServletRequest request, HttpServletResponse response){
-        CookieUtils.deleteCookie( request, response,TOKEN_KEY);
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        CookieUtils.deleteCookie(request, response, TOKEN_KEY);
         return "logoutSuccess";
     }
 
     @RequestMapping("/token/{token}")
     @ResponseBody
-    public Object getUserByToken(@PathVariable String token,String callback){
-        LoveReadResult result= userService.getUserByToken(token);
-        if(StringUtils.isNotEmpty(callback)){
+    public Object getUserByToken(@PathVariable String token, String callback) {
+        LoveReadResult result = userService.getUserByToken(token);
+        if (StringUtils.isNotEmpty(callback)) {
             MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
             mappingJacksonValue.setJsonpFunction(callback);
             return mappingJacksonValue;
         }
         return result;
     }
+
+//    @RequestMapping("/favorite")
+//    public String list(Long id, Model model) throws Exception{
+//        SearchResult result = searchService.list(id);
+//        String category = searchService.getNameByCid(cid);
+//        model.addAttribute("query", cid);
+//        model.addAttribute("name", category);
+//        model.addAttribute("totalPages", result.getTotalPages());
+//        model.addAttribute("recourdCount", result.getRecourdCount());
+//        model.addAttribute("page", page);
+//        model.addAttribute("itemList", result.getItemList());
+//        return "favorite-list";
+//    }
 }

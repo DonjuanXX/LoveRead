@@ -99,4 +99,9 @@ public class UserServiceImpl implements UserService {
         redisTemplate.expire(REDIS_SESSION_KEY+":"+token,SESSION_EXPIRE,TimeUnit.MINUTES);
         return LoveReadResult.ok(tbUser);
     }
+
+    @Override
+    public LoveReadResult setfavorite(String favorite) {
+        return null;
+    }
 }
