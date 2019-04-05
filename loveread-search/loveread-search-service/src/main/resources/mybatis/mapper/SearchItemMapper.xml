@@ -26,7 +26,7 @@
         `tb_item` a
         LEFT JOIN tb_item_cat b ON a.cid = b.id
         WHERE a.`status`=1
-        AND a.id=#{itemId}
+        AND a.id=#{userId}
     </select>
     <select id="getItemListByCategory" parameterType="long" resultType="cn.neusoft.loveread.common.pojo.SearchItem">
         SELECT

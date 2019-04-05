@@ -10,10 +10,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,9 +33,9 @@ public class UserController {
     @PostMapping("/register")
     @ResponseBody
     public LoveReadResult register(TbUser tbUser, String favorite) {
-        if (!favorite.equals(""))
-            userService.setfavorite(favorite);
-        return userService.register(tbUser);
+        if (favorite.equals(""))
+            return userService.register(tbUser);
+        return userService.setFavorite(favorite, tbUser);
     }
 
     @PostMapping("/login")
@@ -63,7 +60,8 @@ public class UserController {
     @ResponseBody
     public Object getUserByToken(@PathVariable String token, String callback) {
         LoveReadResult result = userService.getUserByToken(token);
-        if (StringUtils.isNotEmpty(callback)) {
+        if (StringUtils.isNotEmpty(callback)) {//如果是Jsonp请求
+            //把结果封装成一个js语句响应
             MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
             mappingJacksonValue.setJsonpFunction(callback);
             return mappingJacksonValue;
@@ -71,6 +69,17 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping("/favorite/update")
+    @ResponseBody
+    public LoveReadResult updateFavorite(String favorite, Long id) {
+        return userService.updateFavorite(favorite, id);
+    }
+
+    @GetMapping("/favorite/{id}")
+    @ResponseBody
+    public String getFavoriteById(@PathVariable Long id) {
+        return userService.getFavoriteById(id);
+    }
 //    @RequestMapping("/favorite")
 //    public String list(Long id, Model model) throws Exception{
 //        SearchResult result = searchService.list(id);

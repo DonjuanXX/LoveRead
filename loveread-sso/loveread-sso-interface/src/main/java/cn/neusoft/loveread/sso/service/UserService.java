@@ -5,9 +5,16 @@ import cn.neusoft.loveread.pojo.TbUser;
 
 public interface UserService {
     LoveReadResult checkData(String param, Integer type);
-    LoveReadResult register(TbUser tbUser);
-    LoveReadResult login(String username, String password);
-    LoveReadResult getUserByToken(String token);
-    LoveReadResult setfavorite(String favorite);
 
+    LoveReadResult register(TbUser tbUser);
+
+    LoveReadResult login(String username, String password);
+
+    LoveReadResult getUserByToken(String token);
+
+    LoveReadResult setFavorite(String favorite, TbUser tbUser);
+
+    LoveReadResult updateFavorite(String favorite, Long id);
+
+    String getFavoriteById(Long id);
 }

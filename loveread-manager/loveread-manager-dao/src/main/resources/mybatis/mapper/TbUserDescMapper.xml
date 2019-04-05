@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.neusoft.loveread.manager.mapper.TbUserDescMapper">
+    <resultMap id="MiniResultMap" type="cn.neusoft.loveread.pojo.TbUserDesc">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="desc_data" property="descData" jdbcType="LONGVARCHAR"/>
+        <result column="created" property="created" jdbcType="TIMESTAMP"/>
+        <result column="updated" property="updated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap" type="cn.neusoft.loveread.pojo.TbUserDesc">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="desc_data" property="descData" jdbcType="LONGVARCHAR"/>
+        <result column="nickName" property="nickName" jdbcType="LONGVARCHAR"/>
+        <result column="phone_num" property="phoneNum" jdbcType="LONGVARCHAR"/>
+        <result column="created" property="created" jdbcType="TIMESTAMP"/>
+        <result column="updated" property="updated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getItemParamList" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_user_desc
+    </select>
+
+    <select id="getItemParamByCid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_user_desc
+        WHERE user_id = #{cid}
+    </select>
+
+    <insert id="insertItemParam" parameterType="cn.neusoft.loveread.pojo.TbUserDesc">
+        INSERT INTO tb_user_desc
+        (user_id, desc_data,nickName,phone_num, created, updated) VALUES (#{userId}, #{descData}, #{nickName},#{phoneNum},#{created}, #{updated})
+    </insert>
+
+
+</mapper>

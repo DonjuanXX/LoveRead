@@ -31,7 +31,7 @@
         <input type="hidden" name="paymentType" value="2"/>
         <input type="hidden" name="postFee" value="10"/>
         <div th:each="cart,cartStat : ${cartList}">
-            <input type="hidden" th:name="|orderItems[${cartStat.index}].itemId|" th:value="${cart.id}"/>
+            <input type="hidden" th:name="|orderItems[${cartStat.index}].userId|" th:value="${cart.id}"/>
             <input type="hidden" th:name="|orderItems[${cartStat.index}].num|" th:value="${cart.num}"/>
             <input type="hidden" th:name="|orderItems[${cartStat.index}].price|" th:value="${cart.price}"/>
             <input type="hidden" th:name="|orderItems[${cartStat.index}].totalFee|" th:value="${cart.price * cart.num}"/>

@@ -34,6 +34,7 @@ spring:
 dubbo:
   application:
     name: loveread-search
+#    qos-enable: false
   registry:
     address: zookeeper://192.168.25.130:2181
   scan:

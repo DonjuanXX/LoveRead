@@ -3,9 +3,9 @@ package cn.neusoft.loveread.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TbItemParamItem implements Serializable {
+public class TbUserFavorite implements Serializable {
     private Long id;
-    private Long itemId;
+    private Long userId;
     private Date created;
     private Date updated;
     private String paramData;
@@ -18,12 +18,12 @@ public class TbItemParamItem implements Serializable {
         this.id = id;
     }
 
-    public Long getItemId() {
-        return itemId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Date getCreated() {
@@ -47,7 +47,6 @@ public class TbItemParamItem implements Serializable {
     }
 
     public void setParamData(String paramData) {
-        this.paramData = paramData == null?null:paramData.trim();
+        this.paramData = paramData == null ? null : paramData.trim();
     }
-
 }

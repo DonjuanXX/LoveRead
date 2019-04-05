@@ -2,7 +2,7 @@ package cn.neusoft.loveread.pojo;
 
 import java.io.Serializable;
 
-public class TbItemParamAndName extends TbItemParam implements Serializable {
+public class TbUserFavoriteAndName extends TbUserFavorite implements Serializable {
     private String itemCatName;
 
     public String getItemCatName() {

@@ -15,4 +15,8 @@ public class PageController {
     public String showLogin(){
         return "login";
     }
+    @RequestMapping("/favorite-list")
+    public String showFavorite(){
+        return "favorite";
+    }
 }

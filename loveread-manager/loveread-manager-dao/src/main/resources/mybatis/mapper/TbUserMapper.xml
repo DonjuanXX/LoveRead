@@ -42,7 +42,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="cn.neusoft.loveread.pojo.TbUser">
+    <insert id="insert" parameterType="cn.neusoft.loveread.pojo.TbUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_user
         (username, password, phone, email, created, updated) VALUES
         (#{username}, #{password}, #{phone}, #{email}, #{created}, #{updated})

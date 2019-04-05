@@ -211,10 +211,11 @@ defaultArr[3]	='请再次输入密码';
 defaultArr[4]	='请输入短信验证码';
 defaultArr[5]	='请输入验证码';
 defaultArr[6]	='请输入您的优选单邀请码';
-defaultArr[7]	='';
+defaultArr[7]	='请输入您的邮箱';
 defaultArr[8]	='请输入您的用户名。可使用字母、数字、下划线。';
 defaultArr[9]	='此手机号已经被注册！';
 defaultArr[10]	='此手用户名已经被注册！请重新输入。';
+defaultArr[11]  ='您可以输入您喜欢的图书类型';
 /*--------------------------------------------------企业注册数据---------------------------------------------------------*/
 var cpyUserNameId 	= "cpyusername";
 var cpyUserNameErrId= "cpyusernameErr";

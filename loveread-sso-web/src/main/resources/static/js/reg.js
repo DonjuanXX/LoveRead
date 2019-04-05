@@ -264,23 +264,23 @@ var ckmem =function(isCk){
      }*/
 }
 //密码强度显示
-var showStrong=function(errid,rankid,rank){
-    var def ="<font style='font-size:12px;'>安全程度：</font>";
-    var midstr='<em class="default">弱</em><em class="default">中</em><em class="default">强</em>';
-    if(parseInt(rank)==1){
-        midstr ='<em class="ok">弱</em><em class="default">中</em><em class="default">强</em>';
-        $("#"+rankid).html(def+midstr);
-        $("#"+errid).attr("class","reg_error2").html(pwdArr[2]);
-        return;
-    }
-    if(parseInt(rank)==2){
-        midstr ='<em class="ok">弱</em><em class="ok">中</em><em class="default">强</em>';
-    }
-    if(parseInt(rank)==3){
-        midstr ='<em class="ok">弱</em><em class="ok">中</em><em class="ok">强</em>';
-    }
-    $("#"+rankid).html(def+midstr);
-}
+// var showStrong=function(errid,rankid,rank){
+//     var def ="<font style='font-size:12px;'>安全程度：</font>";
+//     var midstr='<em class="default">弱</em><em class="default">中</em><em class="default">强</em>';
+//     if(parseInt(rank)==1){
+//         midstr ='<em class="ok">弱</em><em class="default">中</em><em class="default">强</em>';
+//         $("#"+rankid).html(def+midstr);
+//         $("#"+errid).attr("class","reg_error2").html(pwdArr[2]);
+//         return;
+//     }
+//     if(parseInt(rank)==2){
+//         midstr ='<em class="ok">弱</em><em class="ok">中</em><em class="default">强</em>';
+//     }
+//     if(parseInt(rank)==3){
+//         midstr ='<em class="ok">弱</em><em class="ok">中</em><em class="ok">强</em>';
+//     }
+//     $("#"+rankid).html(def+midstr);
+// }
 
 //check password
 var ckpwd=function(isCk,keyup){

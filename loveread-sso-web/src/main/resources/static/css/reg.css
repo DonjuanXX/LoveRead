@@ -125,6 +125,9 @@ input::-ms-reveal{display: none;}
 .reg_main .registerNow, .reg_main a.regShopping{ display:block; float:left; margin-right:20px; line-height:38px;}
 .reg_main .registerNow{ display:block; float:left; width:271px; height:38px; background:url(/images/reg_btn.jpg) left top no-repeat; font-size:16px; text-align:center; color:#fff;}
 .reg_main .registerNow:hover{ background-position:0 -38px;}
+.reg_main .registerNow2, .reg_main a.regShopping{ display:block; float:left; margin-right:20px; line-height:38px;}
+.reg_main .registerNow2{ margin-left:350px;display:block;text-align:center; float:left; width:60px; height:38px; background:url(/images/reg_btn.jpg) left top no-repeat; font-size:16px; color:#fff;}
+.reg_main .registerNow2:hover{ background-position:0 -38px;}
 .reg_main .regdisabled{ background:#ccc; border-radius:2px; cursor:default;}
 .reg_main a.regShopping{ color:#6e9b0c;}
 .reg_main a.regShopping:hover{ text-decoration:underline;}
