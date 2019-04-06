@@ -8,9 +8,9 @@ public class TbUserDesc implements Serializable {
     private Long userId;
     private Date created;
     private Date updated;
-    private String descData;
     private String nickName;
     private String phoneNum;
+    private String descData;
 
     public Long getId() {
         return id;
@@ -57,7 +57,7 @@ public class TbUserDesc implements Serializable {
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : descData.trim();
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public String getPhoneNum() {
@@ -65,6 +65,6 @@ public class TbUserDesc implements Serializable {
     }
 
     public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum == null ? null : descData.trim();
+        this.phoneNum = phoneNum == null ? null : phoneNum.trim();
     }
 }

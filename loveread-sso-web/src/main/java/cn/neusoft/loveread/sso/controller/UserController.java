@@ -4,6 +4,7 @@ package cn.neusoft.loveread.sso.controller;
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.common.utils.CookieUtils;
 import cn.neusoft.loveread.pojo.TbUser;
+import cn.neusoft.loveread.pojo.TbUserDesc;
 import cn.neusoft.loveread.sso.service.UserService;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -80,16 +81,17 @@ public class UserController {
     public String getFavoriteById(@PathVariable Long id) {
         return userService.getFavoriteById(id);
     }
-//    @RequestMapping("/favorite")
-//    public String list(Long id, Model model) throws Exception{
-//        SearchResult result = searchService.list(id);
-//        String category = searchService.getNameByCid(cid);
-//        model.addAttribute("query", cid);
-//        model.addAttribute("name", category);
-//        model.addAttribute("totalPages", result.getTotalPages());
-//        model.addAttribute("recourdCount", result.getRecourdCount());
-//        model.addAttribute("page", page);
-//        model.addAttribute("itemList", result.getItemList());
-//        return "favorite-list";
-//    }
+
+    @PostMapping("/addHome")
+    @ResponseBody
+    public LoveReadResult addHome(TbUserDesc tbUserDesc) {
+        return userService.addHome(tbUserDesc);
+    }
+
+    @GetMapping("/homeList/{id}")
+    @ResponseBody
+    public Object homeList(@PathVariable Long id) {
+        return userService.getDescById(id);
+    }
+
 }

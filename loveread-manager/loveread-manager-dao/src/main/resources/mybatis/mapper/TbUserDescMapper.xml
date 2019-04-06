@@ -27,12 +27,12 @@
     <select id="getItemParamByCid" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT *
         FROM tb_user_desc
-        WHERE user_id = #{cid}
+        WHERE user_id = #{userId}
     </select>
 
     <insert id="insertItemParam" parameterType="cn.neusoft.loveread.pojo.TbUserDesc">
         INSERT INTO tb_user_desc
-        (user_id, desc_data,nickName,phone_num, created, updated) VALUES (#{userId}, #{descData}, #{nickName},#{phoneNum},#{created}, #{updated})
+        (user_id, desc_data,nickName,phone_num, created, updated) VALUES (#{userId}, #{descData}, #{nickName},#{phoneNum},#{created}, #{updated})  ON DUPLICATE KEY UPDATE desc_data = #{descData} , updated = #{updated}
     </insert>
 
 

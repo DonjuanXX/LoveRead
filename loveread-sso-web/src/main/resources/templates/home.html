@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-    <title>我的爱好</title>
+    <title>个人信息</title>
     <link rel="stylesheet" type="text/css" href="/css/headerfooter.css"/>
     <link rel="stylesheet" type="text/css" href="/css/jquery.alerts.css"/>
     <link rel="stylesheet" type="text/css" href="/css/headerfooterindex.css"/>
@@ -13,10 +13,10 @@
     <script type="text/javascript" src="/js/jquery.alerts.js"></script>
     <script type="text/javascript" src="/js/png.js?v20140521"></script>
 </head>
-<body onload="REGISTER.checkLogin();">
-<!-- header  -->
+<body onload="REGISTER.checkLogin()">
+<!-- header -->
 <div class="header">
-    <a href="http://localhost:8082/index"><img src="/images/logo.png" border="0"><span>返回主页</span></a>
+    <a href="http://localhost:8082/index"><img src="/images/logo.png" border="0"><span>个人信息</span></a>
 </div>
 
 <!--mainStart-->
@@ -25,8 +25,7 @@
 <script type="text/javascript" src="/js/reg.js?v20150122"></script>
 <!-- reg_main -->
 <div class="tabBox clear">
-    <span class="reg_hide reg_show regMr5" id="regper">我的爱好</span>
-    <a href="/user/logout">退出</a>
+    <span class="reg_hide reg_show regMr5" id="regper">个人用户</span>
 </div>
 <!--个人用户-->
 <div class="reg_main reg_border regTab" id="perDiv">
@@ -34,24 +33,42 @@
         <form id="regForm_mod" name="regForm_mod" method="post">
 
             <li class="regMb30">
-                <label><font></font> 兴趣爱好：</label>
+                <label><font>*</font> 收货人：</label>
                 <span class="regM defaultBorder">
-            	<input id="favorite" name="favorite" autocomplete="off" class="regInput" type="text" value="您还未填写兴趣"
-                       onfocus="showtip('favorite','favoriteErr',11);" onblur="$('#favoriteErr').html('')"/>
+            	<input id="nickName" name="nickName" class="regInput" type="text" onkeyup="mail_div(event);"
+                       onfocus="showtip('regName','userMamErr',12);" autocomplete="off" value="未填写"
+                       maxlength="80" onblur="$('#userMamErr').html('')"/>
+				<em></em>
+            </span>
+                <span class="regInput" id="userMamErr"></span>
+            </li>
+            <li></li>
+            <li class="regMb30">
+                <label><font>*</font> 验证手机：</label>
+                <span class="regM defaultBorder">
+            	<input id="phoneNum" name="phoneNum" autocomplete="off" class="regInput" type="text" maxlength="11"
+                       value="未填写"
+                       onfocus="showtip('phone','phoneErr',1);" onblur="$('#phoneErr').html('')"/>
             	<em></em>
             </span>
-                <span class="regInput" id="favoriteErr"></span>
+                <span class="regInput" id="phoneErr"></span>
             </li>
-            <a href="javascript:void(0);" class="registerNow2" id="up" onclick="REGISTER.reg()">更新</a>
             <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <div node-type="layer" class="accountSearch" style="display:none;" id="person_mail"></div>
+            <li class="regMb30">
+                <label><font>*</font> 收货地址：</label>
+                <span class="regM defaultBorder">
+                    <input id="descData" name="descData" class="regInput" type="text" value="未填写"
+                           onfocus="showtip('regName','descErr',13);" autocomplete="off"
+                           maxlength="80" onblur="$('#descErr').html('')"/>
+            	<em></em>
+            </span>
+                <span class="regInput" id="descErr"></span>
+            </li>
+            <input type="hidden" id="userId" name="userId" value="">
             <li class="register regPl88 regMt10" id="sub_per" style="margin-left:29px">
-                <input type="hidden" id="id" name="id" value="">
-                <a href="javascript:void(0);" class="registerNow" id="reg_per_data"
-                   onclick="REGISTER.Search()">根据兴趣索搜</a>
+                <input type="hidden" id="tjuid" name="tjuid" value="">
+                <a href="javascript:void(0);" class="registerNow" id="reg_per_data" onclick="REGISTER.reg()">保存</a>
             </li>
             <br/><br/>
         </form>
@@ -85,20 +102,36 @@
         inputcheck: function () {
             var flag = true;
             //不能为空检查
-            if ($("#favorite").val() == "") {
-                showError("favorite", "favoriteErr", "请描述您喜欢的图书类型");
+            if ($("#nickName").val() == "") {
+                showError("regName", "userMamErr", defaultArr[12]);
+                flag = false;
+            }
+            else if ($("#phoneNum").val() == "") {
+                showError("phone", "phoneErr", memArr[0]);
+                flag = false;
+            } else if (!mobile_preg($("#phoneNum").val())) {
+                showError("phone", "phoneErr", memArr[1]);
+                flag = false;
+            } else if ($("#descData").val() == "") {
+                showError("regName", "descErr", defaultArr[13]);
                 flag = false;
             }
             return flag;
         },
         doSubmit: function () {
-            $.post("/user/favorite/update", $("#regForm_mod").serialize(), function (data) {
+            $.post("/user/addHome", $("#regForm_mod").serialize(), function (data) {
                 if (data.status == 200) {
-                    jAlert('爱好更新成功', "提示");
+                    jAlert('收货地址保存成功！', "提示", function () {
+                        REGISTER.login();
+                    });
                 } else {
-                    jAlert("爱好更新失败！", "提示");
+                    jAlert("收货地址保存失败！", "提示");
                 }
             });
+        },
+        login: function () {
+            location.href = "http://localhost:8082/index";
+            return false;
         },
         reg: function () {
             if (this.inputcheck()) {
@@ -117,31 +150,24 @@
                 success: function (data) {
                     if (data.status == 200) {
                         var id = data.data.id;
-                        $("#id").val(id);
+                        $("#userId").val(id);
                         $.ajax({
-                            url: "http://localhost:8085/user/favorite/" + id,
-                            dataType: "text",
+                            url: "http://localhost:8085/user/homeList/" + id,
+                            dataType: "json",
                             type: "GET",
                             success: function (data2) {
-                                if (data2 != "") {
-                                    $("#favorite").val(data2);
+                                if (data2.status == 200) {
+                                    $("#phoneNum").val(data2.data.phoneNum);
+                                    $("#nickName").val(data2.data.nickName);
+                                    $("#descData").val(data2.data.descData);
                                 }
                             }
-                        });
+                        })
                     }
                 }
             });
-        }, Search: function () {
-            var _ticket = $("#favorite").val();
-            if (_ticket != "您还未填写兴趣")
-                window.location.href = "http://localhost:8083/search.html?keyword=" + _ticket;
-            else jAlert('请填写兴趣', "提示");
         }
     };
-    $(function () {
-        // 查看是否已经登录，如果已经登录查询登录信息
-        REGISTER.checkLogin();
-    });
 </script>
 </body>
 </html>

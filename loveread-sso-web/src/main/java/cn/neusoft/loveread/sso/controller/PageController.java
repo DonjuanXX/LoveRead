@@ -8,15 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/page")
 public class PageController {
     @RequestMapping("/register")
-    public String showRegister(){
+    public String showRegister() {
         return "register";
     }
+
     @RequestMapping("/login")
-    public String showLogin(){
+    public String showLogin() {
         return "login";
     }
+
     @RequestMapping("/favorite-list")
-    public String showFavorite(){
+    public String showFavorite() {
         return "favorite";
+    }
+
+    @RequestMapping("/home")
+    public String showHome() {
+        return "home";
     }
 }

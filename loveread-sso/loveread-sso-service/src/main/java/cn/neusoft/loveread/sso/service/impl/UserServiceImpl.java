@@ -2,9 +2,11 @@ package cn.neusoft.loveread.sso.service.impl;
 
 
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
+import cn.neusoft.loveread.manager.mapper.TbUserDescMapper;
 import cn.neusoft.loveread.manager.mapper.TbUserFavoriteMapper;
 import cn.neusoft.loveread.manager.mapper.TbUserMapper;
 import cn.neusoft.loveread.pojo.TbUser;
+import cn.neusoft.loveread.pojo.TbUserDesc;
 import cn.neusoft.loveread.pojo.TbUserFavorite;
 import cn.neusoft.loveread.sso.service.UserService;
 import com.alibaba.dubbo.common.utils.StringUtils;
@@ -23,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private TbUserMapper userMapper;
     @Autowired
     private TbUserFavoriteMapper favoriteMapper;
+    @Autowired
+    private TbUserDescMapper descMapper;
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     @Value("${REDIS_SESSION_KEY}")
@@ -83,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoveReadResult setFavorite(String favorite, TbUser tbUser) {
         LoveReadResult result = registerMethod(tbUser);
-        if(!result.isOK())
+        if (!result.isOK())
             return result;
         TbUserFavorite tbUserFavorite = new TbUserFavorite();
         tbUserFavorite.setParamData(favorite);
@@ -95,7 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public LoveReadResult updateFavorite(String favorite,Long id) {
+    public LoveReadResult updateFavorite(String favorite, Long id) {
         TbUserFavorite tbUserFavorite = new TbUserFavorite();
         tbUserFavorite.setUserId(id);
         tbUserFavorite.setParamData(favorite);
@@ -108,6 +112,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getFavoriteById(Long id) {
         return favoriteMapper.getFavoriteById(id);
+    }
+
+    @Override
+    public LoveReadResult addHome(TbUserDesc tbUserDesc) {
+        tbUserDesc.setCreated(new Date());
+        tbUserDesc.setUpdated(new Date());
+        descMapper.insertItemParam(tbUserDesc);
+        return LoveReadResult.ok();
+    }
+
+    @Override
+    public LoveReadResult getDescById(Long id) {
+        return LoveReadResult.ok(descMapper.getItemParamByCid(id));
     }
 
     private LoveReadResult registerMethod(TbUser tbUser) {

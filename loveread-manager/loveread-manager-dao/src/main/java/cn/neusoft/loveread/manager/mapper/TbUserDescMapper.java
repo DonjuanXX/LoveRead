@@ -1,6 +1,7 @@
 package cn.neusoft.loveread.manager.mapper;
 
 
+import cn.neusoft.loveread.pojo.TbUserDesc;
 import cn.neusoft.loveread.pojo.TbUserFavorite;
 import cn.neusoft.loveread.pojo.TbUserFavoriteAndName;
 
@@ -10,7 +11,8 @@ public interface TbUserDescMapper {
 
     List<TbUserFavoriteAndName> getItemParamList();
 
-    TbUserFavorite getItemParamByCid(Long cid);
+    TbUserDesc getItemParamByCid(Long cid);
 
-    Integer insertItemParam(TbUserFavorite tbUserFavorite);
+    void insertItemParam(TbUserDesc tbUserDesc);
+
 }
