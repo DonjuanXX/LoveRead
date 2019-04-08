@@ -16,7 +16,7 @@
         insert into tb_order_item (id, item_id, order_id,
           num, title, price, total_fee,
           pic_path)
-        values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR},
           #{num,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=BIGINT}, #{totalFee,jdbcType=BIGINT},
           #{picPath,jdbcType=VARCHAR})
   </insert>

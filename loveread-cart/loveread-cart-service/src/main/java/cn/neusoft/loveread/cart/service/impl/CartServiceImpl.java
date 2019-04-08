@@ -65,7 +65,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public LoveReadResult updateCartNum(Long userId, Long itemId, int num) {
         TbItem tbItem = (TbItem) redisTemplate.opsForHash().get(REDIS_CART_PRE + ":" + userId, itemId + "");
-        tbItem.setNum(tbItem.getNum() + num);
+        tbItem.setNum(num);
         redisTemplate.opsForHash().put(REDIS_CART_PRE + ":" + userId, itemId + "", tbItem);
         return LoveReadResult.ok();
     }

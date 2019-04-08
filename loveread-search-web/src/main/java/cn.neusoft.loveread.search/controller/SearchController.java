@@ -1,13 +1,18 @@
 package cn.neusoft.loveread.search.controller;
 
+import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.common.pojo.SearchResult;
 import cn.neusoft.loveread.search.service.SearchService;
+import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SearchController {
@@ -32,7 +37,7 @@ public class SearchController {
     }
 
     @RequestMapping("/list.html")
-    public String list(Long cid, @RequestParam(defaultValue = "1") Integer page, Model model) throws Exception{
+    public String list(Long cid, @RequestParam(defaultValue = "1") Integer page, Model model) throws Exception {
         SearchResult result = searchService.list(cid, page, PAGE_ROWS);
         String category = searchService.getNameByCid(cid);
         model.addAttribute("query", cid);
@@ -42,5 +47,18 @@ public class SearchController {
         model.addAttribute("page", page);
         model.addAttribute("itemList", result.getItemList());
         return "list";
+    }
+
+    @RequestMapping("/category/{cid}")
+    @ResponseBody
+    public Object getNameByCid(@PathVariable Long cid, String callback) {
+        LoveReadResult result = LoveReadResult.ok(searchService.getNameByCid(cid));
+        if (StringUtils.isNotEmpty(callback)) {//如果是Jsonp请求
+            //把结果封装成一个js语句响应
+            MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
+            mappingJacksonValue.setJsonpFunction(callback);
+            return mappingJacksonValue;
+        }
+        return result;
     }
 }
