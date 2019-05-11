@@ -34,3 +34,4 @@ dubbo:
     basePackages: cn.neusoft.loveread.manager.service
   protocol:
     port: 20880
+#    serialization: fastjson

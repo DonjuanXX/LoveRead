@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -55,5 +56,10 @@ public class OrderController {
         request.setAttribute("date", dateTime.toString("yyyy-MM-dd"));
         // 4、返回逻辑视图展示成功页面
         return "success";
+    }
+
+    @RequestMapping("/ownOrder.html")
+    public String showOwnOrder(HttpServletRequest request, HttpServletResponse response) {
+        return "ownOrder";
     }
 }

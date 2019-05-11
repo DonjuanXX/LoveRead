@@ -140,6 +140,7 @@
         },
         inputcheck: function () {
             var flag = true;
+            var pflag = true;
             //不能为空检查
             if ($("#regName").val() == "") {
                 showError("regName", "userMamErr", defaultArr[8]);
@@ -147,15 +148,19 @@
             }
             else if ($("#pwd").val() == "") {
                 showError("pwd", "passwordErr", pwdArr[0]);
-                flag = false;
+                pflag = false;
             } else if ($("#pwd").val().length < 6) {
                 $("#Safety1").addClass("ok");
+                $("#Safety2").removeClass("ok");
+                $("#Safety3").removeClass("ok");
                 showError("pwd", "passwordErr", pwdArr[2]);
-                flag = false;
+                pflag = false;
             } else if ($("#pwd").val().length < 9) {
                 $("#Safety2").addClass("ok");
+                $("#Safety1").removeClass("ok");
+                $("#Safety3").removeClass("ok");
                 showError("pwd", "passwordErr", pwdArr[2]);
-                flag = false;
+                pflag = false;
             }
             //密码检查
             else if ($("#pwd").val() != $("#pwdRepeat").val()) {
@@ -175,8 +180,12 @@
                 showError("email", "emailErr", memArr[2]);
                 flag = false;
             }
-            $("#Safety3").addClass("ok");
-            return flag;
+            if(pflag){
+                $("#Safety3").addClass("ok");
+                $("#Safety1").removeClass("ok");
+                $("#Safety2").removeClass("ok");
+            }
+            return flag&pflag;
         },
         beforeSubmit: function () {
             //检查用户是否已经被占用
