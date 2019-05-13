@@ -27,7 +27,7 @@
 <div th:replace="./commons/header::header"></div>
 <div class="orderMain">
     <form id="orderForm" class="hide" action="/order/create.html" method="post">
-        <input type="hidden" name="payment" th:value="${#aggregates.sum(cartList.![price * num]) / 100}"/>
+        <input type="hidden" name="payment" th:value="${#aggregates.sum(cartList.![price * num]) / 100.0 + 10}"/>
         <input type="hidden" name="paymentType" value="2"/>
         <input type="hidden" name="postFee" value="10"/>
         <div th:each="cart,cartStat : ${cartList}">
@@ -126,12 +126,12 @@
                                 <div class="pItem pGoods">
                                     <a th:href="|http://localhost:8084/item/${cart.id}.html|" target="_blank">[[${cart.title}]]</a>
                                 </div>
-                                <div class="pItem pPrice" style="position: relative; z-index: 99">¥[[${cart.price / 100 }]]</div>
+                                <div class="pItem pPrice" style="position: relative; z-index: 99">¥[[${cart.price / 100.0 }]]</div>
                                 <div class="pItem pPromotion">¥0</div>
                                 <div class="pItem pInventory" pid="57111">现货</div>
                                 <div class="pItem pQuantity">[[${cart.num}]]</div>
                                 <div class="pItem pWeight">0.72kg</div>
-                                <div class="pItem pSubtotal">¥[[${cart.price / 100 * cart.num}]]</div>
+                                <div class="pItem pSubtotal">¥[[${cart.price / 100.0 * cart.num}]]</div>
                                 <span class="clear"></span>
                             </div>
                             <div class="orderPInfo order_xj">
@@ -150,7 +150,7 @@
                     <dl class="fl">
                         <dd>
                             <div>1 件商品，总商品金额：</div>
-                            <span class="priceArea">¥<span id="yingProce">[[${#aggregates.sum(cartList.![price * num]) / 100}]]</span></span>
+                            <span class="priceArea">¥<span id="yingProce">[[${#aggregates.sum(cartList.![price * num]) / 100.0}]]</span></span>
                         </dd>
                         <dd>
                             <div>运费金额：</div>
@@ -158,7 +158,7 @@
                         </dd>
                         <dd>
                             <div>应付总额：</div>
-                            <span class="priceArea">¥<span id="allPrice">[[${#aggregates.sum(cartList.![price * num]) / 100 + 10}]]</span></span>
+                            <span class="priceArea">¥<span id="allPrice">[[${#aggregates.sum(cartList.![price * num]) / 100.0+ 10}]]</span></span>
                         </dd>
                     </dl>
                 </div>
@@ -175,7 +175,7 @@
             <div class="orderAccount">
                 <span class="t">应付总额：</span>
                 <span class="p">¥</span>
-                <span id="countPrice" class="p">[[${#aggregates.sum(cartList.![price * num]) / 100 + 10}]]</span>
+                <span id="countPrice" class="p">[[${#aggregates.sum(cartList.![price * num]) / 100.0 + 10}]]</span>
             </div>
             <span class="clear"></span>
         </div>

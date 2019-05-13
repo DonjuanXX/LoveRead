@@ -24,5 +24,8 @@
           #{receiverMobile,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
           #{receiverDistrict,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{receiverZip,jdbcType=VARCHAR},
           #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
-  </insert>
+    </insert>
+    <select id="getShippingById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM tb_order_shipping WHERE order_id = #{orderId}
+    </select>
 </mapper>

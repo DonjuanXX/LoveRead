@@ -2,11 +2,14 @@ package cn.neusoft.loveread.order.controller;
 
 import cn.neusoft.loveread.cart.service.CartService;
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
+import cn.neusoft.loveread.common.utils.CookieUtils;
+import cn.neusoft.loveread.common.utils.JsonUtils;
 import cn.neusoft.loveread.order.pojo.OrderInfo;
 import cn.neusoft.loveread.order.service.OrderService;
 import cn.neusoft.loveread.pojo.TbItem;
 import cn.neusoft.loveread.pojo.TbUser;
 import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -59,7 +63,17 @@ public class OrderController {
     }
 
     @RequestMapping("/ownOrder.html")
-    public String showOwnOrder(HttpServletRequest request, HttpServletResponse response) {
+    public String showOwnOrder(HttpServletRequest request) {
+        //从数据库里拿订单
+        //先获取用户的ID
+        TbUser user = (TbUser) request.getAttribute("user");
+        List<OrderInfo> cartList = orderService.getOrderInfoById(user.getId());
+        request.setAttribute("cartList", cartList);
+//        TbUser user = (TbUser) request.getAttribute("user");
+//        List<TbItem> cartList = cartService.getCartList(user.getId());
+//        request.setAttribute("cartList", cartList);
         return "ownOrder";
     }
+
+
 }

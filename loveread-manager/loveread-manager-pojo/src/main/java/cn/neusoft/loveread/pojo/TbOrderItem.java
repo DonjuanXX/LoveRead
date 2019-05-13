@@ -17,7 +17,7 @@ public class TbOrderItem implements Serializable {
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id ;
     }
 
     public String getItemId() {
@@ -25,7 +25,7 @@ public class TbOrderItem implements Serializable {
     }
 
     public void setItemId(String itemId) {
-        this.itemId = itemId == null ? null : itemId.trim();
+        this.itemId = itemId ;
     }
 
     public String getOrderId() {
@@ -33,7 +33,7 @@ public class TbOrderItem implements Serializable {
     }
 
     public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+        this.orderId = orderId ;
     }
 
     public Integer getNum() {
@@ -73,6 +73,6 @@ public class TbOrderItem implements Serializable {
     }
 
     public void setPicPath(String picPath) {
-        this.picPath = picPath == null ? null : picPath.trim();
+        this.picPath = picPath ;
     }
 }

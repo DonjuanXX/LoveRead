@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="pItem pPrice">
                                     <div style="position: relative;">
-                                        <strong>¥ [[${cart.price / 100}]]</strong>
+                                        <strong>¥ [[${cart.price / 100.0}]]</strong>
                                     </div>
                                 </div>
                                 <div class="pItem pPromotion">&nbsp;</div>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="pItem pWeight">0.05kg<br></div>
                                 <div class="pItem pSubtotal">
-                                    <span id="total_price" class="totalprice">¥[[${cart.price / 100 * cart.num}]]</span>
+                                    <span id="total_price" class="totalprice">¥[[${cart.price / 100.0 * cart.num}]]</span>
                                 </div>
                                 <div class="pItem pInventory">现货</div>
                                 <div class="pItem pOperator">
@@ -134,7 +134,7 @@
             <div class="cartTotalItem">
                 <span id="all_shopePrice">（不含运费）</span>&nbsp;&nbsp;&nbsp;&nbsp;商品总计：
                 <!--<span class="cartPrice" id="allMoney2" th:if="${cartList.size()}==0">¥ 0</span>-->
-                <span class="cartPrice" id="allMoney3" th:if="${cartList.size()} &gt; 0">¥  [[${#aggregates.sum(cartList.![price * num]) / 100}]]</span>
+                <span class="cartPrice" id="allMoney3" th:if="${cartList.size()} &gt; 0">¥  [[${#aggregates.sum(cartList.![price * num]) / 100.0}]]</span>
                 <span class="cartPrice" id="allMoney2" th:if="${cartList.size()} &lt; 1">¥  0</span>
             </div>
         </div>

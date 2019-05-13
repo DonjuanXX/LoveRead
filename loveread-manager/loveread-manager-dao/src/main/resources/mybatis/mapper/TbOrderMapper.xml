@@ -31,4 +31,8 @@
           #{shippingCode,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{buyerMessage,jdbcType=VARCHAR},
           #{buyerNick,jdbcType=VARCHAR}, #{buyerRate,jdbcType=INTEGER})
     </insert>
+
+    <select id="getIdByfUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT * FROM tb_order WHERE user_id = #{id}
+    </select>
 </mapper>

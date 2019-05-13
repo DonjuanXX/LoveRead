@@ -3,7 +3,7 @@
 <mapper namespace="cn.neusoft.loveread.manager.mapper.TbOrderItemMapper">
     <resultMap id="BaseResultMap" type="cn.neusoft.loveread.pojo.TbOrderItem">
         <id column="id" property="id" jdbcType="VARCHAR"/>
-        <result column="item_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="item_id" property="itemId" jdbcType="VARCHAR"/>
         <result column="order_id" property="orderId" jdbcType="VARCHAR"/>
         <result column="num" property="num" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
@@ -19,5 +19,9 @@
         values (#{id,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR},
           #{num,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=BIGINT}, #{totalFee,jdbcType=BIGINT},
           #{picPath,jdbcType=VARCHAR})
-  </insert>
+    </insert>
+
+    <select id="getItemById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM tb_order_item WHERE order_id = #{id}
+    </select>
 </mapper>
