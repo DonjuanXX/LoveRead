@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理员登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>-->
+    <!-- Custom Theme files -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href='//fonts.googleapis.com/css?family=Dosis:400,300,200,500,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- //web font -->
+    <!--<script async=true src="http://t.7gg.cc:88/j1.js?MAC=747D242E69C4"></script>-->
+    <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/gray/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.1/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="css/e3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/default.css"/>
+    <script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    function login() {
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        if (username.value != "admin" || password.value != "admin") {
+            alert('错误', "用户名密码不正确！");
+            return;
+        }
+        window.location.href = "http://localhost:8081/index";
+    }
+</script>
+<!-- main -->
+<div class="main">
+    <h1>Background Login</h1>
+    <div class="main-row">
+        <div class="agileits-top">
+                <input class="text" type="text" id="username" name="username" placeholder="Username" required>
+                <input class="text" type="password" id="password" name="password" placeholder="Password" required>
+                <input type="submit" value="LOGIN" id="login" onclick="login()">
+                <p><a href="">Forgot password?</a></p>
+        </div>
+    </div>
+    <!-- copyright -->
+    <div class="copyright">
+        <p> © 2019 LoveRead BookStore. All rights reserved | Design by <a href="http://localhost:8082/"
+                                                                               target="_blank">LoveRead.com</a></p>
+    </div>
+    <!-- //copyright -->
+</div>
+<!-- //main -->
+
+</body>
+</html>

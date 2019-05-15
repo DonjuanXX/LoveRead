@@ -1,5 +1,6 @@
 package cn.neusoft.loveread.order.service.impl;
 
+import cn.neusoft.loveread.common.pojo.EasyUIDataGridResult;
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.manager.mapper.TbOrderItemMapper;
 import cn.neusoft.loveread.manager.mapper.TbOrderMapper;
@@ -10,6 +11,8 @@ import cn.neusoft.loveread.pojo.TbOrder;
 import cn.neusoft.loveread.pojo.TbOrderItem;
 import cn.neusoft.loveread.pojo.TbOrderShipping;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -98,6 +101,22 @@ public class OrderServiceImpl implements OrderService {
             list.add(orderInfo);
         }
         return list;
+    }
+
+    @Override
+    public OrderInfo getOrderById(Long itemId) {
+        return null;
+    }
+
+    @Override
+    public EasyUIDataGridResult getOrderList(int page, int rows) {
+        PageHelper.startPage(page,rows);
+        List<TbOrder> list = orderMapper.getOrderList();
+        PageInfo<TbOrder> pageInfo = new PageInfo<>(list);
+        EasyUIDataGridResult result = new EasyUIDataGridResult();
+        result.setTotal(pageInfo.getTotal());
+        result.setRows(list);
+        return result;
     }
 
 

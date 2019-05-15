@@ -10,4 +10,6 @@ public interface TbOrderMapper {
     int insert(TbOrder record);
 
     List<TbOrder> getIdByfUser(Long id);
+
+    List<TbOrder> getOrderList();
 }
