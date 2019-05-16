@@ -46,7 +46,7 @@ public class ContentController {
 
     @RequestMapping("/edit")
     @ResponseBody
-    public LoveReadResult updateContent(TbContent content){
+    public LoveReadResult updateContent(TbContent content){//只传递一个id
         TbContent target = contentService.getContentById(content.getId());
         content.setCategoryId(target.getCategoryId());
         content.setCreated(target.getCreated());

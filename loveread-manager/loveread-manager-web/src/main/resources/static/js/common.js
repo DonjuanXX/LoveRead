@@ -55,6 +55,19 @@ var E3 = {
         	return '未知';
         }
     },
+    formatOrderStatus : function formatOrderStatus(val,row){
+        if (val == 1){
+            return '未付款';
+        } else if(val == 2){
+            return '<span style="color:#b1ff62;">已付款</span>';
+        } else if(val == 3) {
+            return '<span style="color:red;">未发货</span>';
+        } else if(val == 4) {
+            return '已发货';
+		} else if(val == 5) {
+            return '订单完成';
+        }
+	},
     
     init : function(data){
     	// 初始化图片上传组件

@@ -1,6 +1,7 @@
 package cn.neusoft.loveread.manager.controller;
 
 import cn.neusoft.loveread.common.pojo.EasyUIDataGridResult;
+import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.order.pojo.OrderInfo;
 import cn.neusoft.loveread.order.service.OrderService;
 import cn.neusoft.loveread.pojo.TbOrder;
@@ -57,11 +58,10 @@ public class OrderController {
 //        return tbItemService.getItemDescById(itemId);
 //    }
 //
-//    @RequestMapping("/update")
-//    @ResponseBody
-//    public LoveReadResult update(TbItem item,String desc) {
-//        TbItemDesc ItemDesc = tbItemService.getItemDescById(item.getId());
-//        ItemDesc.setItemDesc(desc);
-//        return tbItemService.updateItem(item,ItemDesc);
-//    }
+    @RequestMapping("/update")
+    @ResponseBody
+    public LoveReadResult update(Long status,TbOrder order) {
+//        return orderService.updateOrder(order);
+        return LoveReadResult.ok();
+    }
 }

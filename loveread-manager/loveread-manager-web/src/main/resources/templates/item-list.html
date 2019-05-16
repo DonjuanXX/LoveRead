@@ -3,8 +3,8 @@
     <thead>
     <tr>
         <th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'id',width:60">商品ID</th>
-        <th data-options="field:'title',width:200">商品标题</th>
+        <th data-options="field:'id',width:60">书籍ID</th>
+        <th data-options="field:'title',width:200">书籍标题</th>
         <th data-options="field:'cid',width:100">叶子类目</th>
         <th data-options="field:'sellPoint',width:100">卖点</th>
         <th data-options="field:'price',width:70,align:'right',formatter:E3.formatPrice">价格</th>
@@ -16,7 +16,7 @@
     </tr>
     </thead>
 </table>
-<div id="itemEditWindow" class="easyui-window" title="编辑商品"
+<div id="itemEditWindow" class="easyui-window" title="编辑书籍"
      data-options="modal:true,closed:true,iconCls:'icon-save',href:'/item-edit'"
      style="width:80%;height:80%;padding:10px;">
 </div>
@@ -46,11 +46,11 @@
         handler: function () {
             var ids = getSelectionsIds();
             if (ids.length == 0) {
-                $.messager.alert('提示', '必须选择一个商品才能编辑!');
+                $.messager.alert('提示', '必须选择一个书籍才能编辑!');
                 return;
             }
             if (ids.indexOf(',') > 0) {
-                $.messager.alert('提示', '只能选择一个商品!');
+                $.messager.alert('提示', '只能选择一个书籍!');
                 return;
             }
 
@@ -80,16 +80,16 @@
         handler: function () {
             var ids = getSelectionsIds();
             if (ids.length == 0) {
-                $.messager.alert('提示', '未选中商品!');
+                $.messager.alert('提示', '未选中书籍!');
                 return;
             }
-            $.messager.confirm('确认', '确定删除ID为 ' + ids + ' 的商品吗？', function (r) {
+            $.messager.confirm('确认', '确定删除ID为 ' + ids + ' 的书籍吗？', function (r) {
                 if (r) {
                     var params = {"ids": ids};
                     //String
                     $.post("/item/delete", params, function (data) {
                         if (data.status == 200) {
-                            $.messager.alert('提示', '删除商品成功!', undefined, function () {
+                            $.messager.alert('提示', '删除书籍成功!', undefined, function () {
                                 $("#itemList").datagrid("reload");
                             });
                         }
