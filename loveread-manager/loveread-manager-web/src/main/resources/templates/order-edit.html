@@ -2,66 +2,32 @@
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
-	<form id="itemeEditForm" class="itemForm" method="post">
-		<input type="hidden" name="id"/>
-	    <table cellpadding="5">
-	        <tr>
-	            <td>订单状态:</td>
-	            <td>
-	            	<a href="http://localhost:8081/order/update?status=1" class="easyui-linkbutton selectItemCat">未付款</a>
-					<a href="http://localhost:8081/order/update?status=2" class="easyui-linkbutton selectItemCat">已付款</a>
-					<a href="http://localhost:8081/order/update?status=3" class="easyui-linkbutton selectItemCat">未发货</a>
-					<a href="http://localhost:8081/order/update?status=4" class="easyui-linkbutton selectItemCat">已发货</a>
-					<a href="http://localhost:8081/order/update?status=5" class="easyui-linkbutton selectItemCat">订单完成</a>
-	            </td>
-	        </tr>
-	    </table>
-	</form>
+    <table cellpadding="5" id="itemEditWindow">
+        <tr>
+            <td>订单状态:</td>
+            <td>
+                <input type="hidden" name="orderId" id="orderId1"/>
+                <a href="javascript:void(0)" class="easyui-linkbutton selectItemCat" onclick="submitForm(1)">未付款</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton selectItemCat" onclick="submitForm(2)">已付款</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton selectItemCat" onclick="submitForm(3)">未发货</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton selectItemCat" onclick="submitForm(4)">已发货</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton selectItemCat" onclick="submitForm(5)">订单完成</a>
+            </td>
+        </tr>
+    </table>
 </div>
 <script type="text/javascript">
-	var itemEditEditor ;
-	$(function(){
-		//实例化编辑器
-		itemEditEditor = E3.createEditor("#itemeEditForm [name=desc]");
-        E3.initOnePicUpload();
-	});
-	
-	function submitForm(){
-		if(!$('#itemeEditForm').form('validate')){
-			$.messager.alert('提示','表单还未填写完成!');
-			return ;
-		}
-		$("#itemeEditForm [name=price]").val(eval($("#itemeEditForm [name=priceView]").val()) * 100);
-		itemEditEditor.sync();
-		
-		var paramJson = [];
-		$("#itemeEditForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		paramJson = JSON.stringify(paramJson);
-		
-		$("#itemeEditForm [name=itemParams]").val(paramJson);
-		
-		$.post("/item/update",$("#itemeEditForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','修改订单信息成功!','info',function(){
-					$("#itemEditWindow").window('close');
-					$("#itemList").datagrid("reload");
-				});
-			}
-		});
-	}
+    function submitForm(a) {
+        $.post("http://localhost:8081/order/update?status="+a+"&orderId=" + $("#orderId1").attr("value"), function (data) {
+            if (data.status == 200) {
+                $.messager.alert('提示', '修改订单信息成功!', 'info', function () {
+                    $("#itemEditWindow").window('close');
+                });
+            }else{
+                $.messager.alert('提示', '修改订单信息失败!', 'info', function () {
+                    $("#itemEditWindow").window('close');
+                });
+            }
+        });
+    }
 </script>

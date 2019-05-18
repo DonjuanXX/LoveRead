@@ -51,7 +51,6 @@ public class OrderServiceImpl implements OrderService {
         Date date = new Date();
         String random = String.valueOf(date.getTime());
         String randomId = orderId + random.substring(random.length() - 5);
-//        String orderId = ORDER_ID_BEGIN+date.toString();
         orderInfo.setOrderId(randomId);
         orderInfo.setPostFee("10");
         //1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
@@ -81,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderInfo> getOrderInfoById(Long Id) {
-        List<TbOrder> tbOrders = orderMapper.getIdByfUser(Id);
+        List<TbOrder> tbOrders = orderMapper.getIdByUser(Id);
         List<OrderInfo> list = new ArrayList<>();
         for (TbOrder tbOrder : tbOrders) {
             List<TbOrderItem> orderItem = orderItemMapper.getItemById(tbOrder.getOrderId());
@@ -104,8 +103,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderInfo getOrderById(Long itemId) {
-        return null;
+    public TbOrder getOrderById(Long itemId) {
+        return orderMapper.getOrderById(itemId);
     }
 
     @Override
@@ -118,6 +117,15 @@ public class OrderServiceImpl implements OrderService {
         result.setRows(list);
         return result;
     }
+
+    @Override
+    public LoveReadResult update(TbOrder order) {
+        order.setUpdateTime(new Date());
+        orderMapper.update(order);
+        return LoveReadResult.ok();
+    }
+
+
 
 
 }

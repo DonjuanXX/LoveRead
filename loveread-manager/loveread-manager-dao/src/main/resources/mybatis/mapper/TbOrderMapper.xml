@@ -32,11 +32,36 @@
           #{buyerNick,jdbcType=VARCHAR}, #{buyerRate,jdbcType=INTEGER})
     </insert>
 
-    <select id="getIdByfUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="getIdByUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT * FROM tb_order WHERE user_id = #{id}
     </select>
 
     <select id="getOrderList" resultMap="BaseResultMap">
         SELECT * FROM tb_order
+    </select>
+
+    <update id="update" parameterType="cn.neusoft.loveread.pojo.TbOrder">
+        UPDATE tb_order
+        SET payment = #{payment},
+            payment_type = #{paymentType},
+            post_fee = #{postFee},
+            status = #{status},
+            create_time = #{createTime},
+            update_time=#{updateTime},
+            payment_time=#{paymentTime},
+            consign_time=#{consignTime},
+            end_time=#{endTime},
+            close_time=#{closeTime},
+            shipping_name=#{shippingName},
+            shipping_code=#{shippingCode},
+            user_id=#{userId},
+            buyer_message=#{buyerMessage,},
+            buyer_nick=#{buyerNick},
+            buyer_rate=#{buyerRate}
+        WHERE order_id = #{orderId}
+    </update>
+
+    <select id="getOrderById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT * FROM tb_order WHERE order_id = #{itemId}
     </select>
 </mapper>

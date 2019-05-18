@@ -9,6 +9,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -16,11 +18,12 @@ public class OrderController {
     @Reference
     private OrderService orderService;
 
-    @GetMapping("/{orderId}")
-    @ResponseBody
-    public OrderInfo getOrderById(@PathVariable Long itemId) {
-        return orderService.getOrderById(itemId);
-    }
+//    @GetMapping("/{orderId}")
+//    @ResponseBody
+//    public OrderInfo getOrderById(@PathVariable Long itemId) {
+////        return orderService.getOrderById(itemId);
+//        return LoveReadResult.ok();
+//    }
 
     @GetMapping("/list")
     @ResponseBody
@@ -29,7 +32,7 @@ public class OrderController {
     }
 
 
-//    @RequestMapping("/save")
+    //    @RequestMapping("/save")
 //    @ResponseBody
 //    public LoveReadResult saveItem(TbItem item, String desc) {
 //        LoveReadResult result = tbItemService.addItem(item, desc);
@@ -60,8 +63,9 @@ public class OrderController {
 //
     @RequestMapping("/update")
     @ResponseBody
-    public LoveReadResult update(Long status,TbOrder order) {
-//        return orderService.updateOrder(order);
-        return LoveReadResult.ok();
+    public LoveReadResult update(Integer status, TbOrder order) {
+        TbOrder tbOrder = orderService.getOrderById(Long.parseLong(order.getOrderId()));
+        tbOrder.setStatus(status);
+        return orderService.update(tbOrder);
     }
 }

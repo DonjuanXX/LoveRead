@@ -3,8 +3,8 @@
     <thead>
     <tr>
         <th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'orderId',width:60">订单ID</th>
-        <th data-options="field:'buyerNick',width:200">买家昵称</th>
+        <th data-options="field:'orderId',width:130">订单ID</th>
+        <th data-options="field:'buyerNick',width:100">买家昵称</th>
         <th data-options="field:'payment',width:70,align:'right',formatter:E3.formatPrice">实付金额</th>
         <th data-options="field:'status',width:60,align:'center',formatter:E3.formatOrderStatus">订单状态</th>
         <th data-options="field:'createTime',width:130,align:'center',formatter:E3.formatDateTime">创建日期</th>
@@ -46,24 +46,12 @@
             }
 
             $("#itemEditWindow").window({
-                // onLoad: function () {
-                //     //回显数据
-                //     var data = $("#orderList").datagrid("getSelections")[0];
-                //     data.priceView = E3.formatPrice(data.price);
-                //     $("#itemeEditForm").form("load", data);
-                //     // 加载商品描述
-                //     $.getJSON('/item/desc/' + data.id, function (_data) {
-                //         if (_data != null) {
-                //             itemEditEditor.html(_data.itemDesc);
-                //         }
-                //     });
-                //
-                //     E3.init({
-                //         "pics": data.image,
-                //         "cid": data.cid
-                //     });
-                // }
+                onLoad: function () {
+                    // 回显数据
+                    $("#orderId1").attr('value',ids);
+                }
             }).window("open");
+            var data = $("#orderList").datagrid("getSelections")[0];
         }
     }, '-'];
 </script>
