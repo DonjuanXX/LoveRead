@@ -1,6 +1,7 @@
 package cn.neusoft.loveread.sso.service.impl;
 
 
+import cn.neusoft.loveread.common.pojo.EasyUIDataGridResult;
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
 import cn.neusoft.loveread.manager.mapper.TbUserDescMapper;
 import cn.neusoft.loveread.manager.mapper.TbUserFavoriteMapper;
@@ -11,6 +12,8 @@ import cn.neusoft.loveread.pojo.TbUserFavorite;
 import cn.neusoft.loveread.sso.service.UserService;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -125,6 +128,58 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoveReadResult getDescById(Long id) {
         return LoveReadResult.ok(descMapper.getItemParamByCid(id));
+    }
+
+
+    @Override
+    public EasyUIDataGridResult getUserList(Integer page, Integer rows) {
+        PageHelper.startPage(page,rows);
+        List<TbUser> list = userMapper.getOrderList();
+        PageInfo<TbUser> pageInfo = new PageInfo<>(list);
+        EasyUIDataGridResult result = new EasyUIDataGridResult();
+        result.setTotal(pageInfo.getTotal());
+        result.setRows(list);
+        return result;
+    }
+
+    @Override
+    public LoveReadResult update(TbUser user) {
+        TbUser nul = userMapper.selectUserById(user.getId());
+        TbUser real = userMapper.selectUserById(user.getId());
+        nul.setUsername("aaa");
+        nul.setPhone("15900000000");
+        nul.setEmail("1@1.com");
+        userMapper.update(nul);
+        LoveReadResult readResult = checkData(user.getUsername(), 1);
+        if (!(boolean) readResult.getData()) {
+            userMapper.update(real);
+            return LoveReadResult.build(400, "用户名重复");
+        }
+        if (user.getPhone() != null) {
+            readResult = checkData(user.getPhone(), 2);
+            if (!(boolean) readResult.getData()) {
+                userMapper.update(real);
+                return LoveReadResult.build(400, "手机号重复");
+            }
+        }
+        if (user.getEmail() != null) {
+            readResult = checkData(user.getEmail(), 3);
+            if (!(boolean) readResult.getData()) {
+                userMapper.update(real);
+                return LoveReadResult.build(400, "邮箱重复");
+            }
+        }
+        nul.setUpdated(new Date());
+        nul.setPhone(user.getPhone());
+        nul.setEmail(user.getEmail());
+        nul.setUsername(user.getUsername());
+        userMapper.update(nul);
+        return LoveReadResult.ok();
+    }
+
+    @Override
+    public void delete(Long id) {
+        userMapper.delect(id);
     }
 
     private LoveReadResult registerMethod(TbUser tbUser) {

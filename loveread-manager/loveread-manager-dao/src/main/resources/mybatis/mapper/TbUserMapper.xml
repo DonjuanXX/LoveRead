@@ -47,4 +47,26 @@
         (username, password, phone, email, created, updated) VALUES
         (#{username}, #{password}, #{phone}, #{email}, #{created}, #{updated})
     </insert>
+
+    <select id="getOrderList" resultMap="BaseResultMap">
+        SELECT * FROM tb_user
+    </select>
+
+    <update id="update">
+        UPDATE tb_user
+        SET username= #{username},
+        phone = #{phone},
+        email = #{email},
+        updated = #{updated}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delect" parameterType="long">
+        DELETE FROM tb_user WHERE id = #{id}
+    </delete>
+
+    <select id="selectUserById" parameterType="long" resultMap="BaseResultMap">
+        SELECT * FROM tb_user
+        WHERE id = #{id}
+    </select>
 </mapper>

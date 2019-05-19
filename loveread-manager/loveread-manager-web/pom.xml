@@ -45,6 +45,11 @@
         </dependency>
         <dependency>
             <groupId>cn.neusoft.loveread</groupId>
+            <artifactId>loveread-sso-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.neusoft.loveread</groupId>
             <artifactId>loveread-manager-pojo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

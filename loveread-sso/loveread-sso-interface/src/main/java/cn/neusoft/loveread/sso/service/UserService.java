@@ -1,6 +1,8 @@
 package cn.neusoft.loveread.sso.service;
 
+import cn.neusoft.loveread.common.pojo.EasyUIDataGridResult;
 import cn.neusoft.loveread.common.pojo.LoveReadResult;
+import cn.neusoft.loveread.pojo.TbItem;
 import cn.neusoft.loveread.pojo.TbUser;
 import cn.neusoft.loveread.pojo.TbUserDesc;
 
@@ -22,4 +24,11 @@ public interface UserService {
     LoveReadResult addHome(TbUserDesc tbUserDesc);
 
     LoveReadResult getDescById(Long id);
+
+    EasyUIDataGridResult getUserList(Integer page, Integer rows);
+
+    LoveReadResult update(TbUser user);
+
+    void delete(Long id);
+
 }

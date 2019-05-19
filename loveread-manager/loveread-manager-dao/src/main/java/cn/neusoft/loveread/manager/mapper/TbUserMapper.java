@@ -12,4 +12,12 @@ public interface TbUserMapper {
     int insert(TbUser user);
 
     List<TbUser> selectUserByNameOrPwd(Map<String, Object> paramMap);
+
+    List<TbUser> getOrderList();
+
+    void update(TbUser user);
+
+    void delect(Long id);
+
+    TbUser selectUserById(Long id);
 }
